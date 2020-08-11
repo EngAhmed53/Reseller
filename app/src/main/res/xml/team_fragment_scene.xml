@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"/>
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:motion="http://schemas.android.com/apk/res-auto">-->
+
+<!--    <Transition-->
+<!--        motion:constraintSetEnd="@+id/end"-->
+<!--        motion:constraintSetStart="@+id/start"-->
+<!--        motion:duration="1000">-->
+<!--        <OnSwipe-->
+<!--            motion:dragDirection="dragUp"-->
+<!--            motion:touchAnchorId="@id/info_frame"-->
+<!--            motion:touchAnchorSide="top" />-->
+<!--    </Transition>-->
+
+
+<!--    <ConstraintSet android:id="@+id/start">-->
+<!--        <Constraint-->
+<!--            android:id="@id/header_txt"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            motion:layout_constraintBottom_toTopOf="@+id/subHeader_txt"-->
+<!--            motion:layout_constraintEnd_toEndOf="parent"-->
+<!--            motion:layout_constraintStart_toStartOf="parent"-->
+<!--            motion:layout_constraintTop_toTopOf="parent"-->
+<!--            motion:layout_constraintVertical_chainStyle="packed" />-->
+
+<!--        <Constraint-->
+<!--            android:id="@id/subHeader_txt"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:alpha="1"-->
+<!--            motion:layout_constraintHorizontal_bias="0.0"-->
+<!--            motion:layout_constraintStart_toStartOf="@id/header_txt"-->
+<!--            motion:layout_constraintEnd_toEndOf="@id/header_txt"-->
+<!--            motion:layout_constraintTop_toBottomOf="@+id/header_txt"-->
+<!--            motion:layout_constraintVertical_bias="0.0" />-->
+
+<!--        <Constraint-->
+<!--            android:id="@id/info_frame"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="96dp"-->
+<!--            motion:layout_constraintBottom_toBottomOf="parent"-->
+<!--            motion:layout_constraintEnd_toEndOf="parent"-->
+<!--            motion:layout_constraintLeft_toLeftOf="parent"-->
+<!--            motion:layout_constraintRight_toRightOf="parent"-->
+<!--            motion:layout_constraintStart_toStartOf="parent"-->
+<!--            motion:layout_constraintTop_toBottomOf="@+id/subHeader_txt" />-->
+
+<!--    </ConstraintSet>-->
+
+<!--    <ConstraintSet android:id="@+id/end">-->
+<!--        <Constraint-->
+<!--            android:id="@id/header_txt"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            motion:layout_constraintBottom_toTopOf="@+id/subHeader_txt"-->
+<!--            motion:layout_constraintEnd_toEndOf="parent"-->
+<!--            motion:layout_constraintStart_toStartOf="parent"-->
+<!--            motion:layout_constraintTop_toTopOf="parent"-->
+<!--            motion:layout_constraintVertical_bias="0.0"-->
+<!--            motion:layout_constraintVertical_chainStyle="packed" />-->
+
+<!--        <Constraint-->
+<!--            android:id="@id/subHeader_txt"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:alpha="0"-->
+<!--            motion:layout_constraintHorizontal_bias="0.0"-->
+<!--            motion:layout_constraintStart_toStartOf="@id/header_txt"-->
+<!--            motion:layout_constraintEnd_toEndOf="@id/header_txt"-->
+<!--            motion:layout_constraintTop_toBottomOf="@+id/header_txt"-->
+<!--            motion:layout_constraintVertical_bias="0.0" />-->
+
+
+<!--        <Constraint-->
+<!--            android:id="@id/info_frame"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:visibility="visible"-->
+<!--            motion:layout_constraintBottom_toBottomOf="parent"-->
+<!--            motion:layout_constraintLeft_toLeftOf="parent"-->
+<!--            motion:layout_constraintRight_toRightOf="parent"-->
+<!--            motion:layout_constraintTop_toBottomOf="@+id/header_txt" />-->
+
+<!--    </ConstraintSet>-->

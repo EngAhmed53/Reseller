@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabGravity="fill"
+            app:tabIndicatorGravity="top"
+            app:tabIndicatorFullWidth="true"
+            app:tabMode="fixed"
+            app:tabRippleColor="@color/colorPrimaryDark">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/home_tab"
+                android:layout_width="wrap_content"
+                android:text="@string/profile"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_home" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/my_team_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_supervised_user" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/customers_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_customers" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/reports_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_baseline_bar" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/profile_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_person" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray2"
+            app:layout_constraintBottom_toTopOf="@+id/tabLayout" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="entryScreenViewModel"
+            type="com.shouman.apps.reseller.admin.ui.auth.entryScreen.EntryScreenViewModel" />
+
+        <variable
+            name="email"
+            type="String" />
+
+        <variable
+            name="password"
+            type="String" />
+
+        <variable
+            name="validator"
+            type="com.shouman.apps.reseller.admin.utils.Validator" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".ui.auth.Fragment_entry_screen">
+
+                <TextView
+                    android:id="@+id/welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/josefinsans_medium"
+                    android:text="@string/welcome"
+                    android:textAppearance="@style/Headline4"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@id/welcome_subHeader"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/welcome_subHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="@string/please_sign_in_to_continue"
+                    android:textAppearance="@style/Subtitle1"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/welcome"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/google_card_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/google_color"
+                    android:backgroundTint="@color/google_color"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> entryScreenViewModel.googleSignIn()}"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintBottom_toTopOf="@+id/facebook_card_view"
+                    app:layout_constraintEnd_toEndOf="@id/facebook_card_view"
+                    app:layout_constraintStart_toStartOf="@id/facebook_card_view"
+                    app:layout_constraintTop_toBottomOf="@+id/welcome_subHeader"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:rippleColor="?colorControlHighlight">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/google_log_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/google_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_margin="12dp"
+                            android:contentDescription="@string/continue_with_google"
+                            android:src="@drawable/ic_google_logo"
+                            android:tint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView4"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/jost_medium"
+                            android:padding="8dp"
+                            android:text="@string/continue_with_google"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/view"
+                            app:layout_constraintStart_toEndOf="@+id/google_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_margin="8dp"
+                            android:layout_marginStart="27dp"
+                            android:background="@android:color/transparent"
+                            android:backgroundTint="@android:color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView4"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/facebook_card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/facebook_color"
+                    android:backgroundTint="@color/facebook_color"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> entryScreenViewModel.facebookSignIn()}"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintBottom_toTopOf="@id/email_card_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/google_card_view">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/facebook_log_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/facebook_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_margin="12dp"
+                            android:contentDescription="@string/continue_with_facebook"
+                            android:src="@drawable/ic_facebook_logo"
+                            android:tint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView5"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/jost_medium"
+                            android:padding="8dp"
+                            android:text="@string/continue_with_facebook"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/view2"
+                            app:layout_constraintStart_toEndOf="@+id/facebook_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.facebook.login.widget.LoginButton
+                            android:id="@+id/facebook_login_button"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:alpha="0"
+                            android:paddingBottom="1dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_margin="8dp"
+                            android:layout_marginStart="27dp"
+                            android:background="@android:color/transparent"
+                            android:backgroundTint="@android:color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView5"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/email_card_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/white_transparent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/terms_text"
+                    app:layout_constraintEnd_toEndOf="@+id/facebook_card_view"
+                    app:layout_constraintStart_toStartOf="@+id/facebook_card_view"
+                    app:layout_constraintTop_toBottomOf="@+id/facebook_card_view">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/email_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/email_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_margin="12dp"
+                            android:contentDescription="@string/continue_with_email"
+                            android:src="@drawable/ic_email"
+                            android:tint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView6"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/jost_medium"
+                            android:padding="8dp"
+                            android:text="@string/continue_with_email"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/view3"
+                            app:layout_constraintStart_toEndOf="@+id/email_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view3"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_margin="8dp"
+                            android:layout_marginStart="27dp"
+                            android:background="@android:color/transparent"
+                            android:backgroundTint="@android:color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView6"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/email_inputLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:focusable="true"
+                            android:hint="@string/email_address_edit_text"
+                            android:textColorHint="@color/black"
+                            app:boxCornerRadiusBottomEnd="4dp"
+                            app:boxCornerRadiusBottomStart="4dp"
+                            app:boxCornerRadiusTopEnd="4dp"
+                            app:boxCornerRadiusTopStart="4dp"
+                            app:boxStrokeWidth="1dp"
+                            app:endIconDrawable="@drawable/ic_round_check_24"
+                            app:endIconMode="custom"
+                            app:endIconTint="@color/colorAccent"
+                            app:hintTextAppearance="@style/Caption"
+                            app:hintTextColor="@color/gray1"
+                            app:layout_constraintBottom_toTopOf="@+id/password_InputLayout"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:setEndIconActive="@{validator.Companion.isEmailValid(email)}">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_email_sign_in"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:inputType="textEmailAddress"
+                                android:maxLength="100"
+                                android:maxLines="1"
+                                android:text="@={email}"
+                                android:textAppearance="@style/Medium"
+                                android:textColor="@color/primary_text"
+                                android:textColorHint="@color/gray1" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/password_InputLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center_horizontal"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:focusable="true"
+                            android:hint="@string/password_edit_text"
+                            android:textColorHint="@color/black"
+                            app:boxCornerRadiusBottomEnd="4dp"
+                            app:boxCornerRadiusBottomStart="4dp"
+                            app:boxCornerRadiusTopEnd="4dp"
+                            app:boxCornerRadiusTopStart="4dp"
+                            app:boxStrokeWidth="1dp"
+                            app:hintTextAppearance="@style/Caption"
+                            app:hintTextColor="@color/gray1"
+                            app:layout_constraintBottom_toTopOf="@+id/btn_email_sign_up"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/email_inputLayout"
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@color/white">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:focusable="true"
+                                android:inputType="textPassword"
+                                android:maxLength="100"
+                                android:maxLines="1"
+                                android:text="@={password}"
+                                android:textAppearance="@style/Medium"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/gray1" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/btn_email_sign_up"
+                            android:layout_width="wrap_content"
+                            android:layout_height="56dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:elevation="6dp"
+                            android:enabled="@{validator.Companion.isPasswordValid(password) &amp;&amp; validator.Companion.isEmailValid(email)}"
+                            android:onClick="@{() -> entryScreenViewModel.emailSignUp(email.trim(), password.trim())}"
+                            android:paddingLeft="36dp"
+                            android:paddingRight="36dp"
+                            android:text="@string/create_new_account"
+                            android:textAppearance="@style/Button"
+                            app:layout_constraintBottom_toTopOf="@+id/btn_email_sign_in"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/password_InputLayout" />
+
+                        <Button
+                            android:id="@+id/btn_email_sign_in"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:elevation="6dp"
+                            android:enabled="@{validator.Companion.isPasswordValid(password) &amp;&amp; validator.Companion.isEmailValid(email)}"
+                            android:onClick="@{() -> entryScreenViewModel.emailSignIn(email, password)}"
+                            android:text="@string/sign_in_btn"
+                            android:textAppearance="@style/Button"
+                            app:layout_constraintBottom_toTopOf="@+id/forget_password"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_email_sign_up"
+                            app:layout_constraintStart_toStartOf="@+id/btn_email_sign_up"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_email_sign_up" />
+
+                        <Button
+                            android:id="@+id/forget_password"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="56dp"
+                            android:text="@string/did_you_forget_your_password"
+                            android:textAppearance="@style/Button"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_email_sign_in" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/terms_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/entry_terms"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/white_transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/email_card_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/protection_frame"
+            status="@{entryScreenViewModel.signInStatus}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_transparent"
+            android:elevation="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:elevation="16dp">
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:indeterminateBehavior="repeat"
+                    android:indeterminateTint="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/loading_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/loading_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="@string/sign_you_in"
+                    android:textAppearance="@style/Subtitle1"
+                    android:textColor="@color/primary_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/progressBar2"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</layout>

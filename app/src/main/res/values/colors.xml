@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="colorPrimaryLight">#B2DFDB</color>
+    <color name="colorAccent">#FF5722</color>
+
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
+
+    <color name="colorAccent2">#E49B6C</color>
+    <color name="material_green">#08C1B0</color>
+    <color name="material_yellow">#FFC411</color>
+    <color name="material_blue">#039BE5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_transparent">#69FFFFFF</color>
+    <color name="black">#212121</color>
+    <color name="black_transparent">#00212121</color>
+    <color name="gray1">#616161</color>
+    <color name="gray2">#8e8e8e</color>
+    <color name="facebook_color">#4267B2</color>
+    <color name="facebook_color_dark">#253964</color>
+    <color name="facebook_color_transparent">#734267B2</color>
+    <color name="google_color">#DB4437</color>
+    <color name="google_color_dark">#8B2E27</color>
+    <color name="google_color_transparent">#73DB4437</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>
+    <color name="shadow_color">#66000000</color>
+    <color name="white_ripple_color">#23000000</color>
+    <color name="white_blue">#e7e7ec</color>
+    <color name="white3">#F8EEEDED</color>
+    <color name="dark_transparent">#58000000</color>
+</resources>
+

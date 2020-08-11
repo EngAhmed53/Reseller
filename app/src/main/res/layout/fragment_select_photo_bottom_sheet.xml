@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="userInfoViewModel"
+            type="com.shouman.apps.reseller.admin.ui.auth.completeUserInfo.CompleteUserInfoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_openCamera"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="6dp"
+            android:onClick="@{() -> userInfoViewModel.openCamera()}"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/open_camera"
+            android:textAppearance="@style/Button"
+            app:layout_constraintBottom_toTopOf="@+id/btn_openFiles"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Button
+            android:id="@+id/btn_openFiles"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:backgroundTint="@color/colorAccent"
+            android:elevation="6dp"
+            android:padding="8dp"
+            android:onClick="@{() -> userInfoViewModel.openFiles()}"
+            android:text="@string/select_photo_from_files"
+            android:textAppearance="@style/Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_openCamera"
+            app:layout_constraintStart_toStartOf="@id/btn_openCamera"
+            app:layout_constraintTop_toBottomOf="@+id/btn_openCamera" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

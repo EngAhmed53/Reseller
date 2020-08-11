@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <item-->
+<!--        android:id="@+id/action_offline_data"-->
+<!--        android:icon="@drawable/ic_backup"-->
+<!--        android:orderInCategory="1"-->
+<!--        android:title="@string/offline_data"-->
+<!--        app:showAsAction="ifRoom" />-->
+
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/ic_person_white_24dp"
+        android:orderInCategory="2"
+        android:title="@string/profile"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_my_customers"
+        android:icon="@drawable/ic_view_list"
+        android:orderInCategory="3"
+        android:title="@string/my_customers"
+        app:showAsAction="ifRoom" />
+
+    <group
+        android:menuCategory="secondary"
+        android:orderInCategory="4">
+        <item
+            android:id="@+id/action_settings"
+            android:orderInCategory="5"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="@string/settings"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_about"
+            android:orderInCategory="6"
+            android:icon="@drawable/ic_info_white" android:title="@string/about"
+            app:showAsAction="never" />
+    </group>
+
+</menu>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "233373677095",
+    "firebase_url": "https://reseller-b2478.firebaseio.com",
+    "project_id": "reseller-b2478",
+    "storage_bucket": "reseller-b2478.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233373677095:android:81d0f6f2ea494fa1ab0002",
+        "android_client_info": {
+          "package_name": "com.shouman.apps.reseller.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233373677095-55ej84l228he18bklv5k2sd3ek1re7n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARB7_GiBI9G9k5FXSr2fOYRRrZS-469JY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233373677095-55ej84l228he18bklv5k2sd3ek1re7n4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

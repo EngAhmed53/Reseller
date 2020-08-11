@@ -1,0 +1,239 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Resellers</string>
+    <string name="email_address_edit_text">Email address</string>
+    <string name="password_edit_text">Password (min. 6 chars)</string>
+    <string name="app_logo_dsc">app_logo</string>
+    <string name="sign_in_btn">Sign in</string>
+    <string name="did_you_forget_your_password">Forget password ?</string>
+    <string name="choose_your_position">Account Type</string>
+    <string name="user_name">User Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="slogan">An Easy, Smart Sales teams and Customers Control System</string>
+    <string name="continue_btn">Continue</string>
+    <string name="please_type_company_name">Please type your Company name</string>
+    <string name="company_name">Company Name</string>
+    <string name="create_new_account">Create an account</string>
+    <string name="i_already_have_account">I already have an account</string>
+    <string name="blank_email_error">your e address can\'t be blank</string>
+    <string name="valid_email_address_error">Please type valid e address</string>
+    <string name="blank_password_error">your password can\'t be blank</string>
+    <string name="mini_chars_password_error">Password minimum length is 6 characters</string>
+    <string name="blank_user_name_error">your name can\'t be blank</string>
+    <string name="spacial_chars_error">your name should not contain any spacial characters</string>
+    <string name="blank_company_name_error">Company name can\'t be blank</string>
+
+
+    <string name="please_select_your_position">Please Select your account type and enter the needed information in order to continue.</string>
+    <string name="select_your_position">Select account type!</string>
+    <string name="name_helper_text">Please Type your personal name</string>
+
+    <string name="facebook_app_id" translatable="false">1037292246690837</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1037292246690837</string>
+    <string name="error">Error</string>
+    <string name="forget_password_title">Forget password?</string>
+    <string name="forget_password_message">No problem, Enter your email address and we\'ll send you a link to change your password.</string>
+    <string name="send_email">Send Email</string>
+    <string name="company_home">Home</string>
+    <string name="company_activities">Activities</string>
+    <string name="company_my_profile">My Profile</string>
+    <string name="branch_name">Branch Name</string>
+    <string name="type_your_new_branch_name_and_then_press_add_button">Type your new branch name and then press add button.</string>
+    <string name="add_new_branch">New Branch</string>
+    <string name="edit_customer_info">Edit Customer Info</string>
+    <string name="customer_name">Customer name</string>
+    <string name="customer_email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="added_time">Added time</string>
+    <string name="google_maps_key" translatable="false">AIzaSyABpiW13-2gPYkgXVyzFypJTQIW1me4Y1s</string>
+
+    <string name="edit_company_info">Edit Company Info</string>
+
+    <string name="home">Home</string>
+    <string name="personal_page">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="my_branch">My Branch</string>
+    <string name="terms_and_condition">Terms And Condition</string>
+    <string name="sign_out">Sign out</string>
+    <string name="exit">Exit</string>
+    <string name="type_the_new_customer_information_then_press_continue">Type the new customer information then press continue.</string>
+    <string name="notes">Notes....</string>
+    <string name="add_customer">Add customer</string>
+    <string name="user_photo">user photo</string>
+    <string name="personal_photo">personal photo</string>
+    <string name="customer_notes">Note</string>
+    <string name="call_customer_phone_number">call customer phone number</string>
+    <string name="search">Search</string>
+
+    <string name="country">Country</string>
+    <string name="city">City</string>
+
+
+    <string name="select_the_customer_then_press_add_new_visit">Select the customer then press add new Visit.</string>
+    <string name="new_visit">New Visit</string>
+    <string name="Choose_customer">Choose Customer</string>
+    <string name="add_notes">Add Notes…</string>
+    <string name="add_visit">Add Visit</string>
+    <string name="new_customer">New Customer</string>
+    <string name="my_customers">My Customers</string>
+    <string name="cancel">Cancel</string>
+    <string name="visits_log_sub_title">Visits Log</string>
+    <string name="visits_log">Visits</string>
+    <string name="sales_info">Sales Man Information</string>
+    <string name="sales_man_customers_list">Sales man customers list</string>
+    <string name="sales_photo">Sales man photo</string>
+    <string name="salesman_name">Name</string>
+
+
+    <string name="add_customer_fab">Add Customer</string>
+    <string name="add_visit_fab">Add Visit</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="my_location">my location</string>
+
+
+    <string name="reports_title">Reports</string>
+    <string name="offline_data">Offline Data</string>
+
+
+    <string name="move_to">Move To</string>
+    <string name="delete">Delete</string>
+    <string name="disable">Disable</string>
+    <string name="choose_branch">Choose Branch</string>
+    <string name="move">Move</string>
+    <string name="move_sales_member_to_another_branch">Move %1$s</string>
+    <string name="check_mark">check mark</string>
+    <string name="status">Status</string>
+    <string name="status_enabled">Enabled</string>
+    <string name="status_disabled">Disabled</string>
+    <string name="disable_sales_msg">Disabled sales members can\'t add new customers or visits to existing customers, are you sure you want to continue ?</string>
+    <string name="disable_sales_title">Disable Sales Member</string>
+    <string name="enable">Enable</string>
+    <string name="disabled_msg">Your account has been disabled, connect your manager for more information.</string>
+    <string name="sales_member_delete_failed_msg">You can\'t delete any sales member that has one or more customers, you should move or delete any customer belong to this sales member before deletion process.</string>
+    <string name="invitation_request">Please ask your supervisor or your manager for the invitation link, we need this invitation link in order to connect you with the company profile.</string>
+    <string name="all_customers">Customers</string>
+    <string name="add_salesman">Add Salesman</string>
+    <string name="share_invitation_link">Share Invitation Link</string>
+    <string name="new_salesman_header">New Salesman</string>
+    <string name="type_the_salesman_info">Type the salesman name, select the branch that he belong\'s to, then share the invitation link with him.</string>
+    <string name="sort_group">Sort By</string>
+    <string name="sort_by_name_a_z">by name ▼</string>
+    <string name="sort_by_name_z_a">by name ▲</string>
+    <string name="sort_by_date_a_z">by date ▼</string>
+    <string name="sort_by_date_z_a">by date ▲</string>
+    <string name="company_customers_list">Press on any customer to view his information, or do a long press to view the action menu.</string>
+    <string name="customer_total_visits">Total Visits</string>
+    <string name="number_of_customers">Number Of Customers</string>
+    <string name="log_entry_status">Log Entry Status</string>
+    <string name="sales_disabled">Disabled Successfully!</string>
+    <string name="sales_deleted">Deleted Successfully!</string>
+    <string name="delete_sales_confirm">Are you sure you want to delete this salesman ?</string>
+    <string name="enabled">Enabled Successfully!</string>
+    <string name="ok_dialog_btn">OK</string>
+    <string name="no_internet_connection">Network Error!</string>
+    <string name="check_your_internet_connection">You need internet connection to perform delete salesman action.</string>
+    <string name="choose_new_branch">Choose new branch</string>
+    <string name="move_salesman_done">Salesman moved successfully!</string>
+    <string name="sales_customers_list">All customers belong to you.</string>
+    <string name="active_label">Activated</string>
+    <string name="disabled_label">Disabled</string>
+    <string name="added_by">Added by</string>
+    <string name="belong_to">Belong to</string>
+    <string name="view_location">Location</string>
+    <string name="customers_map">Customers Map</string>
+    <string name="choose_new_salesman">Choose new salesman</string>
+    <string name="customer_moved_successfully">Customer moved Successfully!</string>
+    <string name="move_customer_subheader">Choose the new salesman to move this customer to, then click move button.</string>
+    <string name="move_sales_subheader">Choose the new branch to move this salesman to, then click move button.</string>
+    <string name="delete_customer">Customer Permanently Delete!</string>
+    <string name="delete_customer_msg">Are you sure you want to delete this customer? Deleted customers data can\'t be retrieved.</string>
+    <string name="delete_customers_msg">Are you sure you want to delete selected customers? Deleted customers data can\'t be retrieved.</string>
+    <string name="customer_deleted">Customer Deleted!</string>
+    <string name="delete_customer_forever">Permanently Delete</string>
+    <string name="move_selected_to">Move selected to</string>
+    <string name="multi_customers_subheader">Choose the new salesman to move selected customers to, then click move button.</string>
+    <string name="profile">Profile</string>
+    <string name="about">About</string>
+    <string name="daily_log">Daily Log</string>
+    <string name="add_new">Add New</string>
+    <string name="create_new_customer">Create new customer</string>
+    <string name="add_new_visit">Add new visit</string>
+    <string name="pick_location">Pick Location</string>
+    <string name="select_customer">select customer</string>
+    <string name="all_data_synced">All customer data is synced!</string>
+    <string name="active_internt_to_sync">Data saved locally, enable your internet connection to sync!</string>
+    <string name="default_notification_channel_id" translatable="false">Resellers Application</string>
+    <string name="notify_new_customer_title">New Customer</string>
+    <string name="notify_new_customer_body">\" created new customer with name \"</string>
+    <string name="notify_new_visit_title">New Visit</string>
+    <string name="notify_new_visit_body">\" added new visit to customer \"</string>
+    <string name="notify_new_salesman_title">New Salesman</string>
+    <string name="notify_new_salesman_body">joined your sales team.</string>
+    <string name="main_notification_channel_name" translatable="false">Primary</string>
+    <string name="activities">Activities</string>
+    <string name="your_sales_team_daily_activities">Your sales team daily activities.</string>
+    <string name="customer">Customer</string>
+    <string name="activity_type">activity type</string>
+    <string name="customers">Customers</string>
+    <string name="visits">Visits</string>
+    <string name="visit">Visit</string>
+    <string name="salesmen">Salesmen</string>
+    <string name="salesman">Salesman</string>
+    <string name="today_activities">today\'s activities:</string>
+    <string name="no_activities_today_yet">No activities today yet!</string>
+    <string name="all_customers_list">All customers list</string>
+    <string name="entry_screen">Entry screen</string>
+    <string name="continue_with_email">Continue with Email</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="log_in_cancelled">Log in cancelled</string>
+    <string name="email_continue_subTitle">Create new account if you don\'t have one or sign in if you already signed up.</string>
+    <string name="just_a_moment">Just a moment</string>
+    <string name="entry_terms">By using this app, you agree to the Terms and Condition and Privacy Policy, you also agree to receive product-related emails from HAWK from which you can unsubscribe at any time.</string>
+    <string name="email_sent_to">"email send to "</string>
+    <string name="type_your_email_address">Please type your email address</string>
+    <string name="add_to_company">" added to Company"</string>
+    <string name="customer_image">customer image</string>
+    <string name="delete_salesman">Delete Salesman!</string>
+    <string name="branch_info">Branch Information</string>
+    <string name="salesman_info">Salesman Information</string>
+    <string name="turn_on_location">Turn on location</string>
+    <string name="location_permission">Location permission needed to get the customer location</string>
+    <string name="location_permission_needed">Location permission needed to get the customer location</string>
+    <string name="visit_added">Visit added Successfully</string>
+    <string name="customer_added">" added to database"</string>
+
+
+    <string name="welcome">Welcome</string>
+    <string name="please_sign_in_to_continue">Please! log in to continue.</string>
+    <string name="server_client_id" translatable="false">233373677095-l6vvq5mfmmrih3mktd3atjrl2fjgsjtr.apps.googleusercontent.com</string>
+    <string name="sign_in_failed">Sign in failed, Please check your network connection and try again.</string>
+    <string name="connection_time_out">Request timed out!</string>
+    <string name="sign_you_in">Sign you in</string>
+    <string name="sign_in_canceled">Sign in canceled!</string>
+    <string name="error_sign_in_with_facebook">Sign in with facebook error!</string>
+    <string name="error_user_collision">An account already exists with the same email address but different sign-in provider.</string>
+    <string name="credential_error">The password is invalid or your account does not have a password.</string>
+    <string name="firebase_uid_error">Your Firebase uid is invalid.</string>
+    <string name="almost_done">Almost Done!</string>
+    <string name="tell_us_more_about_your_company">Tell us more about your company.</string>
+    <string name="upload_profile_pic">upload profile picture</string>
+    <string name="select_photo">select company logo button</string>
+    <string name="select_company_logo">Company Logo</string>
+    <string name="owner_name">Owner name</string>
+    <string name="open_camera">Take New Photo</string>
+    <string name="select_photo_from_files">Select Photo From Device</string>
+    <string name="start_company_info_upload">Please wait....</string>
+    <string name="uploading_company_logo">Uploading logo...</string>
+    <string name="uploading_company_info">Sync company info...</string>
+    <string name="upload_logo_error">Error while uploading your logo.</string>
+    <string name="upload_error">Error while uploading your data, please try again later.</string>
+    <string name="team">Team</string>
+    <string name="team_subHeader">Company branches and each branch salesmen.</string>
+    <string name="sales_team_header">Sales Team</string>
+    <string name="sales_img">salesman profile image</string>
+
+
+</resources>
