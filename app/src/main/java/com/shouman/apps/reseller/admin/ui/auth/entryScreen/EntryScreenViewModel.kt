@@ -13,11 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.*
 import com.shouman.apps.reseller.admin.R
-import com.shouman.apps.reseller.admin.api.ResponseCode
-import com.shouman.apps.reseller.admin.api.UsersApi
-import com.shouman.apps.reseller.admin.api.UsersApiServices
-import com.shouman.apps.reseller.admin.data.model.User
-import com.shouman.apps.reseller.admin.data.model.UserType
+import com.shouman.apps.reseller.admin.api.*
 import com.shouman.apps.reseller.admin.preferences.UserPreferences
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -253,13 +249,13 @@ class EntryScreenViewModel(application: Application) : AndroidViewModel(applicat
 
     private suspend fun sendUserInfoToServer(firebaseUser: FirebaseUser) {
         //add or get user from the server
-        usersApiServices = UsersApi.usersService
+        usersApiServices = NetworkCall.usersService
 
         try {
             Log.e("debug: entryViewModel", "trying to send user to server")
 
             val serverResponse = usersApiServices.addNewUserToDatabaseAsync(
-                User(
+                ServerUser(
                     -555,
                     firebaseUser.uid, firebaseUser.email!!, UserType.COMPANY, null
                 )

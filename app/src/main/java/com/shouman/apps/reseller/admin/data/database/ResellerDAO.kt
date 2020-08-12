@@ -2,10 +2,9 @@ package com.shouman.apps.reseller.admin.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.google.android.play.core.install.model.InstallErrorCode
-import com.shouman.apps.reseller.admin.data.model.Branch
-import com.shouman.apps.reseller.admin.data.model.BranchSalesmen
-import com.shouman.apps.reseller.admin.data.model.Salesman
+import com.shouman.apps.reseller.admin.data.model.DatabaseBranchSalesmen
+import com.shouman.apps.reseller.admin.data.model.DatabaseBranch
+import com.shouman.apps.reseller.admin.data.model.DatabaseSalesman
 
 @Dao
 interface ResellerDAO {
@@ -15,57 +14,57 @@ interface ResellerDAO {
      */
     @Transaction
     @Query("SELECT * FROM branches")
-    fun getBranchesAndSalesmen():LiveData<List<BranchSalesmen>>
+    fun getBranchesAndSalesmen():LiveData<List<DatabaseBranchSalesmen>>
 
     /**
      *add new branch to database.
      */
-    @Insert
-    fun insertNewBranch(branch:Branch)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertNewBranch(databaseBranch:DatabaseBranch)
 
     /**
      *add a list of branches to database.
      */
-    @Insert
-    fun insertBranchesList(branchesList:List<Branch>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBranchesList(vararg databaseBranches:DatabaseBranch)
 
     /**
      * delete a branch from database,
      * this only works if no salesmen linked with this branch.
      */
     @Delete
-    fun deleteBranch(branch: Branch)
+    fun deleteBranch(databaseBranch: DatabaseBranch)
 
     /**
      * update branch information.
      */
     @Update
-    fun updateBranch(branch: Branch)
+    fun updateBranch(databaseBranch: DatabaseBranch)
 
     /**
      *add new salesman to database.
      */
-    @Insert
-    fun insertNewSalesmen(salesman: Salesman)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertNewSalesmen(salesman: DatabaseSalesman)
 
     /**
      *add a list of salesmen to database.
      */
-    @Insert
-    fun insertSalesmenList(salesmenList:List<Salesman>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSalesmenList(vararg salesmenList:DatabaseSalesman)
 
     /**
      * delete a salesman from database,
      * this only works if no customers linked with this salesman.
      */
     @Delete
-    fun deleteSalesman(salesman: Salesman)
+    fun deleteSalesman(salesman: DatabaseSalesman)
 
     /**
      * update salesman information.
      */
     @Update
-    fun updateSalesman(salesman: Salesman)
+    fun updateSalesman(salesman: DatabaseSalesman)
 
 
 

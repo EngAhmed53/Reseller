@@ -1,10 +1,7 @@
 package com.shouman.apps.reseller.admin.api
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.shouman.apps.reseller.admin.data.model.Branch
-import com.shouman.apps.reseller.admin.data.model.Company
-import com.shouman.apps.reseller.admin.data.model.User
-import com.shouman.apps.reseller.admin.preferences.UserPreferences
+import com.shouman.apps.reseller.admin.data.model.DatabaseBranch
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -17,18 +14,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 
-enum class ResponseCode {
-    SUCCESS,
-    FIREBASE_CODE_NOT_VALID,
-    NEW_USER_NOT_VALID,
-    NEW_USER_INFO_NOT_VALID
-}
+class BasicAuthInterceptor(user: String,password: String) : Interceptor {
 
-data class ServerResponse<T>(val responseCode: ResponseCode, val body: T?)
-
-class BasicAuthInterceptor(val user: String, val password: String) : Interceptor {
-
-    val credential = Credentials.basic(user, password)
+    private val credential = Credentials.basic(user, password)
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val authRequest = request
@@ -74,38 +62,39 @@ private val retrofit by lazy {
 interface UsersApiServices {
 
     @POST("users")
-    fun addNewUserToDatabaseAsync(@Body user: User?): Deferred<ServerResponse<User?>>
+    fun addNewUserToDatabaseAsync(@Body user: ServerUser?): Deferred<ServerResponse<ServerUser?>>
 
     @PUT("users/companies/{firebaseUID}")
-    fun updateCompanyInfoAsync(@Path("firebaseUID") firebaseUID: String, @Body company: Company?): Deferred<ServerResponse<User?>>
+    fun updateCompanyInfoAsync(
+        @Path("firebaseUID") firebaseUID: String,
+        @Body company: ServerCompany?
+    ): Deferred<ServerResponse<ServerUser?>>
 
     @GET("users/{firebaseUID}")
-    fun getUserByFirebaseUID(@Path("firebaseUID") firebaseUID: String): Deferred<ServerResponse<User?>>
+    fun getUserByFirebaseUID(@Path("firebaseUID") firebaseUID: String): Deferred<ServerResponse<ServerUser?>>
 
 }
 
 interface BranchesApiServices {
 
 
-    @POST("companies/{companyID}")
-    fun addNewBranchToServerAsync(@Path("companyId") companyId:Long,
-                                  @Body branch: Branch): Deferred<ServerResponse<Branch?>>
+    @POST("companies/{companyID}/branches")
+    fun addNewBranchToServerAsync(
+        @Path("companyId") companyId: Long,
+        @Body branch: DatabaseBranch
+    ): Deferred<ServerResponse<DatabaseBranch?>>
 
-    @PUT("users/companies/{firebaseUID}")
-    fun updateCompanyInfoAsync(@Path("firebaseUID") firebaseUID: String, @Body company: Company?): Deferred<ServerResponse<User?>>
 
-    @GET("users/{firebaseUID}")
-    fun getUserByFirebaseUID(@Path("firebaseUID") firebaseUID: String): Deferred<ServerResponse<User?>>
-
+    @GET("companies/{companyID}/branches")
+    fun getAllBranchesAsync(@Path("companyID") companyID: Long): Deferred<Set<ServerBranch>>
 }
 
-
-object UsersApi {
+object NetworkCall {
     val usersService: UsersApiServices by lazy {
         retrofit.create(UsersApiServices::class.java)
     }
 
-    val branchesServices: BranchesApiServices by lazy{
+    val branchesServices: BranchesApiServices by lazy {
         retrofit.create(BranchesApiServices::class.java)
     }
 }

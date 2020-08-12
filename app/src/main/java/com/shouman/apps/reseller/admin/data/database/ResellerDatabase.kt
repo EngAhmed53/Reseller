@@ -5,12 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.shouman.apps.reseller.admin.data.model.Branch
-import com.shouman.apps.reseller.admin.data.model.Salesman
+import com.shouman.apps.reseller.admin.data.model.DatabaseBranch
+import com.shouman.apps.reseller.admin.data.model.DatabaseSalesman
 import com.shouman.apps.reseller.admin.data.model.SalesmanStatusConverter
 
 
-@Database(entities = [Branch::class, Salesman::class], version = 1, exportSchema = false)
+@Database(entities = [DatabaseBranch::class, DatabaseSalesman::class], version = 1, exportSchema = false)
 @TypeConverters(SalesmanStatusConverter::class)
 abstract class ResellerDatabase : RoomDatabase(){
 

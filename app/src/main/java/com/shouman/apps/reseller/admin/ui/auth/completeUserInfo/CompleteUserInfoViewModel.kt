@@ -15,9 +15,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.shouman.apps.reseller.admin.api.ResponseCode
-import com.shouman.apps.reseller.admin.api.UsersApi
+import com.shouman.apps.reseller.admin.api.ServerCompany
+import com.shouman.apps.reseller.admin.api.NetworkCall
 import com.shouman.apps.reseller.admin.api.UsersApiServices
-import com.shouman.apps.reseller.admin.data.model.Company
 import com.shouman.apps.reseller.admin.preferences.UserPreferences
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -207,10 +207,10 @@ class CompleteUserInfoViewModel(application: Application) : AndroidViewModel(app
     /**
      * set the company object to send ot to server
      */
-    private suspend fun setCompanyInfo(ownerName: String, companyName: String): Company {
+    private suspend fun setCompanyInfo(ownerName: String, companyName: String): ServerCompany {
         _uploadCompanyInfoStatus.postValue(UploadInfoStatus.START_PHOTO_UPLOAD)
         val logoPhotoPath = uploadPhotoToFirebaseStorage()
-        return Company(-555, ownerName, fullOwnerNumber!!, companyName, logoPhotoPath)
+        return ServerCompany(-555, ownerName, fullOwnerNumber!!, companyName, logoPhotoPath)
     }
 
 
@@ -247,7 +247,7 @@ class CompleteUserInfoViewModel(application: Application) : AndroidViewModel(app
         val company = setCompanyInfo(ownerName, companyName)
 
         _uploadCompanyInfoStatus.postValue(UploadInfoStatus.START_COMPANY_INFO_UPLOAD)
-        usersApiServices = UsersApi.usersService
+        usersApiServices = NetworkCall.usersService
 
         val serverResponse = usersApiServices.updateCompanyInfoAsync(
             UserPreferences.getFirebaseUID(context)!!,

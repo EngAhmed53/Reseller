@@ -3,8 +3,8 @@ package com.shouman.apps.reseller.admin.preferences
 import android.content.Context
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import com.shouman.apps.reseller.admin.data.model.User
-import com.shouman.apps.reseller.admin.data.model.UserType
+import com.shouman.apps.reseller.admin.api.ServerUser
+import com.shouman.apps.reseller.admin.api.UserType
 
 object UserPreferences {
     private const val USER_ID: String = "userId"
@@ -75,7 +75,7 @@ object UserPreferences {
             IMAGE_URL, null
         )
 
-    fun setUserInfo(context: Context, user: User?) {
+    fun setUserInfo(context: Context, user: ServerUser?) {
         val preference = PreferenceManager.getDefaultSharedPreferences(context)
         user?.let { theUser ->
 
@@ -92,7 +92,7 @@ object UserPreferences {
                 )
 
                 // set the company data to session
-                theUser.company?.let { theCompany ->
+                theUser.serverCompany?.let { theCompany ->
                     putLong(COMPANY_ID, theCompany.id)
                     putString(USER_NAME, theCompany.ownerName)
                     putString(PHONE_NUMBER, theCompany.ownerPhoneNumber)

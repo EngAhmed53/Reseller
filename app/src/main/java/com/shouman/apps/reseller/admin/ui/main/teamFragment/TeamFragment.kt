@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.shouman.apps.reseller.admin.R
+import com.shouman.apps.reseller.admin.adapters.BranchesListAdapter
+import com.shouman.apps.reseller.admin.databinding.TeamFragmentBinding
 
 class TeamFragment : Fragment() {
 
@@ -14,19 +17,24 @@ class TeamFragment : Fragment() {
         fun newInstance() = TeamFragment()
     }
 
+    private lateinit var mBinding:TeamFragmentBinding
+
     private lateinit var viewModel: TeamViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.team_fragment, container, false)
-    }
+        mBinding = TeamFragmentBinding.inflate(inflater)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TeamViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+        viewModel = ViewModelProvider(this).get(TeamViewModel::class.java)
 
+        mBinding.lifecycleOwner = this
+
+        mBinding.teamViewModel = viewModel
+
+        mBinding.branchesRec.adapter = BranchesListAdapter()
+
+        return mBinding.root
+    }
 }
