@@ -30,7 +30,7 @@ class BasicAuthInterceptor(user: String,password: String) : Interceptor {
 
 val BASIC_NAME: String = "admin"
 val BASIC_PASWORD: String = "password"
-private val BASE_URL = "http://192.168.1.8:8080/hawk/"
+private val BASE_URL = "http://192.168.1.6:8080/hawk/"
 
 
 /**

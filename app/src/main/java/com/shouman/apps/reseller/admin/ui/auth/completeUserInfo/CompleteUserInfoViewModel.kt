@@ -256,6 +256,10 @@ class CompleteUserInfoViewModel(application: Application) : AndroidViewModel(app
 
         when (serverResponse.responseCode) {
             ResponseCode.SUCCESS -> {
+
+                println("server response is ok")
+
+
                 UserPreferences.setUserInfo(context, serverResponse.body)
                 _uploadCompanyInfoStatus.postValue(UploadInfoStatus.COMPLETE)
             }

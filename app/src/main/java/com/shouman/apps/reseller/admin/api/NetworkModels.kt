@@ -29,7 +29,7 @@ data class ServerUser(
 
     var type: UserType = UserType.NULL,
 
-    var serverCompany: ServerCompany?
+    var company: ServerCompany?
 )
 
 data class ServerCompany(

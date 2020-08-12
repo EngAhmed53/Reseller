@@ -12,6 +12,12 @@
     </style>
 
     <!--font styles-->
+
+    <style name="LogoStyle" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:fontFamily">@font/josefinsans_medium</item>
+        <item name="fontFamily">@font/josefinsans_medium</item>
+    </style>
+
     <style name="Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="android:fontFamily">@font/jost_regular</item>
         <item name="fontFamily">@font/jost_regular</item>

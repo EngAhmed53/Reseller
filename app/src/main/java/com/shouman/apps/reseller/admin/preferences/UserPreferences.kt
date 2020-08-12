@@ -92,7 +92,7 @@ object UserPreferences {
                 )
 
                 // set the company data to session
-                theUser.serverCompany?.let { theCompany ->
+                theUser.company?.let { theCompany ->
                     putLong(COMPANY_ID, theCompany.id)
                     putString(USER_NAME, theCompany.ownerName)
                     putString(PHONE_NUMBER, theCompany.ownerPhoneNumber)

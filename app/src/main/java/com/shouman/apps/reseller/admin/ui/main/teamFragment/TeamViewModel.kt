@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.shouman.apps.reseller.admin.data.database.ResellerDatabase
+import com.shouman.apps.reseller.admin.domain.DomainBranchSalesmen
 import com.shouman.apps.reseller.admin.repository.BranchesRepository
 import kotlinx.coroutines.*
 
@@ -19,6 +20,7 @@ enum class DataStatus {
 
 
 class TeamViewModel(application: Application) : AndroidViewModel(application) {
+    val context = application
 
     private val TIMER: Long = 10000
     private val viewModelJob = SupervisorJob()
@@ -34,29 +36,32 @@ class TeamViewModel(application: Application) : AndroidViewModel(application) {
         get() = _dataStat
 
 
-    val branchesAndSalesmen = branchesRepository.branchesSalesmenList.apply {
-        if (this.value.isNullOrEmpty()) {
+    val branchesAndSalesmen = branchesRepository.branchesSalesmenList
+
+    fun checkIfLocalDataAvailable(): LiveData<List<DomainBranchSalesmen>> {
+        if (branchesRepository.branchesSalesmenList.value.isNullOrEmpty()) {
 
             _dataStat.postValue(DataStatus.LOCAL_EMPTY)
 
             viewModelScope.launch {
 
                 val job = withTimeoutOrNull(TIMER) {
-                    fetchDataFromServer(application)
+                    fetchDataFromServer(context)
                 }
                 if (job == null) _dataStat.postValue(DataStatus.ERROR)
             }
         } else _dataStat.postValue(DataStatus.FETCHED)
+        return branchesRepository.branchesSalesmenList
     }
 
     private suspend fun fetchDataFromServer(application: Application) {
         try {
-            when(branchesRepository.refreshBranchesSalesmenList(application)) {
+            when (branchesRepository.refreshBranchesSalesmenList(application)) {
                 true -> _dataStat.postValue(DataStatus.FETCHED)
                 false -> _dataStat.postValue(DataStatus.SERVER_EMPTY)
             }
         } catch (e: Exception) {
-            Log.e("fitch data","error", e)
+            Log.e("fitch data", "error", e)
             _dataStat.postValue(DataStatus.ERROR)
         }
     }

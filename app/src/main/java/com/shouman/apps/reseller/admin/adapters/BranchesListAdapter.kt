@@ -6,16 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.shouman.apps.reseller.admin.databinding.BranchListItemBinding
-import com.shouman.apps.reseller.admin.domain.DomainBranch
 import com.shouman.apps.reseller.admin.domain.DomainBranchSalesmen
-import com.shouman.apps.reseller.admin.domain.DomainSalesman
 
 
 class BranchesListAdapter :
     ListAdapter<DomainBranchSalesmen, BranchesListAdapter.BranchViewHolder>(
         DiffCallback
     ) {
-
 
     companion object DiffCallback :
         DiffUtil.ItemCallback<DomainBranchSalesmen>() {
@@ -45,7 +42,13 @@ class BranchesListAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BranchViewHolder {
-        return BranchViewHolder(BranchListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return BranchViewHolder(
+            BranchListItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: BranchViewHolder, position: Int) {

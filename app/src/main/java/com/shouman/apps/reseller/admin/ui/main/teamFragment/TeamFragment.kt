@@ -1,23 +1,19 @@
 package com.shouman.apps.reseller.admin.ui.main.teamFragment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.shouman.apps.reseller.admin.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.shouman.apps.reseller.admin.adapters.BranchesListAdapter
 import com.shouman.apps.reseller.admin.databinding.TeamFragmentBinding
 
 class TeamFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TeamFragment()
-    }
-
-    private lateinit var mBinding:TeamFragmentBinding
+    private lateinit var mBinding: TeamFragmentBinding
 
     private lateinit var viewModel: TeamViewModel
 
@@ -33,7 +29,16 @@ class TeamFragment : Fragment() {
 
         mBinding.teamViewModel = viewModel
 
-        mBinding.branchesRec.adapter = BranchesListAdapter()
+        mBinding.branchesRec.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = BranchesListAdapter()
+            setHasFixedSize(true)
+        }
+
+        viewModel.branchesAndSalesmen.observe(viewLifecycleOwner, Observer {
+            viewModel.checkIfLocalDataAvailable()
+        })
 
         return mBinding.root
     }

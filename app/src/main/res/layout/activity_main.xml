@@ -8,23 +8,38 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleMarginStart="0dp"
+            app:title="@string/app_name"
+            app:titleTextAppearance="@style/LogoStyle"
+            app:titleTextColor="@color/colorPrimary"/>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:tabGravity="fill"
-            app:tabIndicatorGravity="top"
             app:tabIndicatorFullWidth="true"
+            app:tabIndicatorGravity="bottom"
             app:tabMode="fixed"
             app:tabRippleColor="@color/colorPrimaryDark">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/home_tab"
                 android:layout_width="wrap_content"
-                android:text="@string/profile"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_home" />
 
@@ -57,16 +72,38 @@
             android:id="@+id/line_view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray2"
-            app:layout_constraintBottom_toTopOf="@+id/tabLayout" />
+            android:background="@color/dark_transparent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout"
+            app:layout_constraintBottom_toTopOf="@id/viewPager2"/>
+
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+            app:layout_constraintTop_toBottomOf="@id/line_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
+            app:backgroundTint="@color/colorAccent"
+            app:borderWidth="0dp"
+            app:elevation="8dp"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            app:fabSize="normal"
+            android:layout_margin="16dp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorRipple="?colorControlHighlight"
+            app:fab_hideAnimation="@anim/fab_scale_down"
+            app:fab_showAnimation="@anim/fab_scale_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="?colorControlHighlight" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

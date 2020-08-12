@@ -4,108 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="teamViewModel"
             type="com.shouman.apps.reseller.admin.ui.main.teamFragment.TeamViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        tools:context=".ui.main.teamFragment.TeamFragment">
+        android:background="@color/white">
 
-        <TextView
-            android:id="@+id/header_txt"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jost_bold"
-            android:text="@string/sales_team_header"
-            android:textAppearance="@style/Headline4"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+            android:backgroundTint="@color/white"
+            android:fitsSystemWindows="true"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+
+            <TextView
+                android:id="@+id/header_txt"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jost_bold"
+                android:text="@string/sales_team_header"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                android:textAppearance="@style/Headline5"
+                android:textColor="@color/primary_text" />
 
 
-        <TextView
-            android:id="@+id/subHeader_txt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/team_subHeader"
-            android:textAppearance="@style/Subtitle1"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/header_txt" />
+            <TextView
+                android:id="@+id/subHeader_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/team_subHeader"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                android:textAppearance="@style/Subtitle1"
+                android:textColor="@color/secondary_text" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <ProgressBar
             android:id="@+id/progress_bar"
+            setProVisibility="@{teamViewModel.dataStat}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
-            android:visibility="visible"
-            setProVisibility="@{teamViewModel.dataStat}"
-            app:layout_constraintBottom_toBottomOf="@+id/branches_rec"
-            app:layout_constraintEnd_toEndOf="@+id/branches_rec"
-            app:layout_constraintStart_toStartOf="@+id/branches_rec"
-            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+            android:visibility="visible" />
 
         <TextView
+            setTextVisibility="@{teamViewModel.dataStat}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Error"
             android:textAppearance="@style/Headline4"
-            android:textColor="@color/white"
-            setTextVisibility="@{teamViewModel.dataStat}"
-            app:layout_constraintBottom_toBottomOf="@+id/branches_rec"
-            app:layout_constraintEnd_toEndOf="@+id/branches_rec"
-            app:layout_constraintStart_toStartOf="@+id/branches_rec"
-            app:layout_constraintTop_toTopOf="@+id/header_txt" />
+            android:textColor="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/branches_rec"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/guideline4"
-            app:layout_constraintEnd_toEndOf="@id/guideline2"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/subHeader_txt"
             setBranchesList="@{teamViewModel.branchesAndSalesmen}"
             setRecVisibility="@{teamViewModel.dataStat}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/branch_list_item" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="16dp" />
+    <!--        <androidx.constraintlayout.widget.Guideline-->
+    <!--            android:id="@+id/guideline"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical"-->
+    <!--            app:layout_constraintGuide_begin="16dp" />-->
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="8dp" />
+    <!--        <androidx.constraintlayout.widget.Guideline-->
+    <!--            android:id="@+id/guideline2"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical"-->
+    <!--            app:layout_constraintGuide_end="16dp" />-->
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_end="16dp" />
+    <!--        <androidx.constraintlayout.widget.Guideline-->
+    <!--            android:id="@+id/guideline3"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            app:layout_constraintGuide_begin="8dp" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--        <androidx.constraintlayout.widget.Guideline-->
+    <!--            android:id="@+id/guideline4"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            app:layout_constraintGuide_end="16dp" />-->
+
 </layout>

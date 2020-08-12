@@ -36,7 +36,7 @@ class BranchesRepository(private val database: ResellerDatabase) {
             database.resellerDAO.insertSalesmenList(*it.salesmenList.toTypedArray())
         }
 
-        return newData.isNullOrEmpty()
+        return !newData.isNullOrEmpty()
     }
 
     //suspend fun addNewBranchToCompany(bra)
