@@ -2,9 +2,12 @@ package com.shouman.apps.reseller.admin.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.shouman.apps.reseller.admin.data.model.DatabaseBranchSalesmen
+import androidx.sqlite.db.SimpleSQLiteQuery
+import androidx.sqlite.db.SupportSQLiteQueryBuilder
 import com.shouman.apps.reseller.admin.data.model.DatabaseBranch
+import com.shouman.apps.reseller.admin.data.model.DatabaseBranchSalesmen
 import com.shouman.apps.reseller.admin.data.model.DatabaseSalesman
+import com.shouman.apps.reseller.admin.data.model.MiniDatabaseBranch
 
 @Dao
 interface ResellerDAO {
@@ -14,19 +17,22 @@ interface ResellerDAO {
      */
     @Transaction
     @Query("SELECT * FROM branches")
-    fun getBranchesAndSalesmen():LiveData<List<DatabaseBranchSalesmen>>
+    fun getBranchesAndSalesmen(): LiveData<List<DatabaseBranchSalesmen>>
+
+    @Query("SELECT * FROM branches")
+    fun getBranches(): LiveData<List<DatabaseBranch>>
 
     /**
      *add new branch to database.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNewBranch(databaseBranch:DatabaseBranch)
+    fun insertNewBranch(databaseBranch: DatabaseBranch)
 
     /**
      *add a list of branches to database.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBranchesList(vararg databaseBranches:DatabaseBranch)
+    fun insertBranchesList(vararg databaseBranches: DatabaseBranch)
 
     /**
      * delete a branch from database,
@@ -51,7 +57,7 @@ interface ResellerDAO {
      *add a list of salesmen to database.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSalesmenList(vararg salesmenList:DatabaseSalesman)
+    fun insertSalesmenList(vararg salesmenList: DatabaseSalesman)
 
     /**
      * delete a salesman from database,
@@ -65,14 +71,6 @@ interface ResellerDAO {
      */
     @Update
     fun updateSalesman(salesman: DatabaseSalesman)
-
-
-
-
-
-
-
-
 
 
 }

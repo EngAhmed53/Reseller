@@ -41,5 +41,15 @@ class Validator {
                 .isEmpty() || phoneNumber.trim().length < 3)
 
         }
+
+        fun isBranchNameValid(branchName: String?): Boolean {
+            return !(branchName == null || branchName.trim().isEmpty())
+
+        }
+
+        fun isSelectedBranchValid(position: Long): Boolean {
+            return (position != -1L)
+
+        }
     }
 }

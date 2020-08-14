@@ -15,7 +15,7 @@
     <color name="colorAccent2">#FFB300</color>
     <color name="material_green">#08C1B0</color>
     <color name="material_yellow">#FFC411</color>
-    <color name="material_blue">#039BE5</color>
+    <color name="material_blue">#00ACC1</color>
     <color name="white">#FFFFFF</color>
     <color name="white_transparent">#69FFFFFF</color>
     <color name="black">#212121</color>
@@ -24,7 +24,7 @@
     <color name="gray2">#8e8e8e</color>
     <color name="facebook_color">#4267B2</color>
     <color name="facebook_color_dark">#253964</color>
-    <color name="facebook_color_transparent">#734267B2</color>
+    <color name="facebook_color_transparent">#884267B2</color>
     <color name="google_color">#DB4437</color>
     <color name="google_color_dark">#8B2E27</color>
     <color name="google_color_transparent">#73DB4437</color>

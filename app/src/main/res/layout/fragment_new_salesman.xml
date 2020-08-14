@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="newSalesViewModel"
+            type="com.shouman.apps.reseller.admin.ui.main.newSalesmanFragment.NewSalesmanViewModel" />
+
+        <variable
+            name="validator"
+            type="com.shouman.apps.reseller.admin.utils.Validator" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/bottom_rounded_corner"
+            android:backgroundTint="@color/material_blue"
+            android:gravity="center"
+            android:text="@string/new_salesman_header"
+            android:textAllCaps="true"
+            android:textAppearance="@style/Headline4"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            style="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_close" />
+
+        <TextView
+            android:id="@+id/subHeader_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/choose_branch_to_add_salesman_to"
+            android:textAppearance="@style/Subtitle1"
+            android:textColor="@color/secondary_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/choose_branch_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="64dp"
+            android:focusable="true"
+            android:hint="@string/select_branch"
+            android:textColorHint="@color/black"
+            app:boxCornerRadiusBottomEnd="4dp"
+            app:boxCornerRadiusBottomStart="4dp"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidth="1dp"
+            app:hintTextAppearance="@style/Caption"
+            app:hintTextColor="@color/gray1"
+            app:layout_constraintBottom_toTopOf="@id/progressBar2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subHeader_txt"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/filled_exposed_dropdown"
+                miniBranchesList="@{newSalesViewModel.miniBranchesList}"
+                newSalesViewModel="@{newSalesViewModel}"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:editable="false"
+                android:maxLines="1"
+                android:textAppearance="@style/Medium"
+                android:textColor="@color/gray1"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/share_branch"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:enabled="@{validator.Companion.isSelectedBranchValid(newSalesViewModel.selectedBranchId)}"
+            android:onClick="@{() -> newSalesViewModel.setDynamicLink()}"
+            android:text="@string/share_invitation_link"
+            android:textAppearance="@style/Button"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="16dp"
+            android:indeterminateBehavior="repeat"
+            android:visibility="@{newSalesViewModel.isProgressVisible? View.VISIBLE : View.INVISIBLE}"
+            android:indeterminateTint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

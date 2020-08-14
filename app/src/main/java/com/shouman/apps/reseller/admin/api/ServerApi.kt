@@ -78,11 +78,11 @@ interface UsersApiServices {
 interface BranchesApiServices {
 
 
-    @POST("companies/{companyID}/branches")
+    @POST("companies/{companyId}/branches")
     fun addNewBranchToServerAsync(
         @Path("companyId") companyId: Long,
-        @Body branch: DatabaseBranch
-    ): Deferred<ServerResponse<DatabaseBranch?>>
+        @Body branch: ServerBranch
+    ): Deferred<ServerResponse<ServerBranch?>>
 
 
     @GET("companies/{companyID}/branches")

@@ -68,6 +68,8 @@ class DatabaseBranchSalesmen(
     val salesmenList: List<DatabaseSalesman>
 )
 
+data class MiniDatabaseBranch(val id:Long, val name:String)
+
 
 fun List<DatabaseBranchSalesmen>.toDomainModels(): List<DomainBranchSalesmen> {
     return map { branchSalesmen ->

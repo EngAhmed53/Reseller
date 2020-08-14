@@ -117,7 +117,7 @@
     <string name="add_salesman">Add Salesman</string>
     <string name="share_invitation_link">Share Invitation Link</string>
     <string name="new_salesman_header">New Salesman</string>
-    <string name="type_the_salesman_info">Type the salesman name, select the branch that he belong\'s to, then share the invitation link with him.</string>
+    <string name="choose_branch_to_add_salesman_to">Choose the branch you want to add the sales representative to, then share the invitation link with the person you want to add.</string>
     <string name="sort_group">Sort By</string>
     <string name="sort_by_name_a_z">by name ▼</string>
     <string name="sort_by_name_z_a">by name ▲</string>
@@ -234,6 +234,11 @@
     <string name="team_subHeader">Company branches and each branch salesmen.</string>
     <string name="sales_team_header">Sales Team</string>
     <string name="sales_img">salesman profile image</string>
+    <string name="add">Add</string>
+    <string name="saving_new_branch_error">Error while saving the new branch.</string>
+    <string name="saved_successfully">Saved Successfully.</string>
+    <string name="select_branch">Select Branch</string>
+    <string name="building_invit_link_faild">Building invitaion link failed, Check your internet connection.</string>
 
 
 </resources>

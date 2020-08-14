@@ -9,6 +9,7 @@ import com.shouman.apps.reseller.admin.data.model.SalesmanStatus
 enum class ResponseCode {
     SUCCESS,
     FIREBASE_CODE_NOT_VALID,
+    COMPANY_ID_NOT_VALID,
     NEW_USER_NOT_VALID,
     NEW_USER_INFO_NOT_VALID
 }
@@ -89,4 +90,13 @@ fun Set<ServerBranch>.toDatabaseModels(): List<DatabaseBranchSalesmen> {
             }
         )
     }
+}
+
+fun ServerBranch.toDatabaseBranch(): DatabaseBranch {
+    return DatabaseBranch(
+        id,
+        branchName,
+        country,
+        city
+    )
 }

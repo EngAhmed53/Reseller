@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="branchViewModel"
+            type="com.shouman.apps.reseller.admin.ui.main.newBranchFragment.NewBranchViewModel"/>
+
+        <variable
+            name="branchName"
+            type="String" />
+
+        <variable
+            name="validator"
+            type="com.shouman.apps.reseller.admin.utils.Validator" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/bottom_rounded_corner"
+            android:backgroundTint="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/add_new_branch"
+            android:textAllCaps="true"
+            android:textAppearance="@style/Headline4"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            style="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_close" />
+
+        <TextView
+            android:id="@+id/subHeader_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/type_your_new_branch_name_and_then_press_add_button"
+            android:textAppearance="@style/Subtitle1"
+            android:textColor="@color/secondary_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/branch_name_inputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:focusable="true"
+            android:hint="@string/branch_name"
+            android:textColorHint="@color/black"
+            app:boxCornerRadiusBottomEnd="4dp"
+            app:boxCornerRadiusBottomStart="4dp"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidth="1dp"
+            app:endIconDrawable="@drawable/ic_round_check_24"
+            app:endIconMode="custom"
+            app:endIconTint="@color/colorAccent"
+            app:hintTextAppearance="@style/Caption"
+            app:hintTextColor="@color/gray1"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subHeader_txt"
+            app:layout_constraintVertical_bias="0.0"
+            app:setEndIconActive="@{validator.Companion.isBranchNameValid(branchName)}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="text"
+                android:maxLength="100"
+                android:maxLines="1"
+                android:text="@={branchName}"
+                android:textAppearance="@style/Medium"
+                android:textColor="@color/primary_text"
+                android:textColorHint="@color/gray1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/add_branch"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="@string/add"
+            android:textAppearance="@style/Button"
+            android:textColor="@color/white"
+            android:onClick="@{() -> branchViewModel.newBranch(branchName)}"
+            android:enabled="@{validator.Companion.isBranchNameValid(branchName)}"
+            app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="16dp"
+            android:indeterminateBehavior="repeat"
+            android:visibility="@{branchViewModel.isProgressVisible? View.VISIBLE : View.INVISIBLE}"
+            android:indeterminateTint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
