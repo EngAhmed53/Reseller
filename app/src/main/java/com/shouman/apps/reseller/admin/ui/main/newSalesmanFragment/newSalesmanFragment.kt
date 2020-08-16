@@ -12,7 +12,6 @@ import com.shouman.apps.reseller.admin.R
 import com.shouman.apps.reseller.admin.adapters.SpinnerArrayAdapter
 import com.shouman.apps.reseller.admin.data.model.MiniDatabaseBranch
 import com.shouman.apps.reseller.admin.databinding.FragmentNewSalesmanBinding
-import com.shouman.apps.reseller.admin.ui.main.newBranchFragment.NewBranchStatus
 
 class NewSalesmanFragment : BottomSheetDialogFragment() {
     private lateinit var mBinding: FragmentNewSalesmanBinding
@@ -46,7 +45,7 @@ class NewSalesmanFragment : BottomSheetDialogFragment() {
             when (invitationStatus) {
                 InvitationLinkBuildStatus.ERROR -> {
                     val contextView = dialog!!.window!!.decorView
-                    Snackbar.make(contextView, getString(R.string.building_invit_link_faild), Snackbar.LENGTH_LONG)
+                    Snackbar.make(contextView, getString(R.string.building_invite_link_failed), Snackbar.LENGTH_LONG)
                         .show()
                     newSalesmanViewModel.restoreInvitationState()
                 }

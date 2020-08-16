@@ -232,6 +232,16 @@
     <string name="saving_new_branch_error">Error while saving the new branch.</string>
     <string name="saved_successfully">Saved Successfully.</string>
     <string name="select_branch">Select Branch</string>
-    <string name="building_invit_link_faild">Building invitaion link failed, Check your internet connection.</string>
+    <string name="building_invite_link_failed">Building invitaion link failed, Check your internet connection.</string>
+    <string name="customers_search">customers serch</string>
+    <string name="no_internet_connection_text">No internet connection</string>
+    <string name="no_internet_connection_subText">Couldn\'t download content, maybe your connection is down? Pull to try again.</string>
+    <string name="superVisor_name">Super visor</string>
+    <string name="invoice_number">Invoice number</string>
+    <string name="invoice_price">Invoice price</string>
+    <string name="payment">Payment</string>
+    <string name="basic_info">Basic Info</string>
+    <string name="visit_info">Visit info</string>
+    <string name="contact_info">Contact info</string>
 
 </resources>

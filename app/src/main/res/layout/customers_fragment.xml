@@ -1,13 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.customersFragment.CustomersFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="customersViewModel"
+            type="com.shouman.apps.reseller.admin.ui.main.customersFragment.CustomersViewModel" />
+
+        <variable
+            name="dataStatus"
+            type="com.shouman.apps.reseller.admin.repository.paging.DataStatus" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:background="@color/white">
 
-</FrameLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fitsSystemWindows="true"
+            app:elevation="0dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
+
+                <ImageButton
+                    android:id="@+id/customers_search"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/circle_image_button"
+                    android:backgroundTint="@android:color/transparent"
+                    android:contentDescription="@string/customers_search"
+                    android:src="@drawable/ic_search"
+                    android:tint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/header_txt"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/header_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jost_bold"
+                    android:text="@string/customers"
+                    android:textAppearance="@style/Headline5"
+                    android:textColor="@color/primary_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/customers_search"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/subHeader_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/company_customers_list"
+                android:textAppearance="@style/Subtitle1"
+                android:textColor="@color/secondary_text"
+                app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/customers_rec"
+                setCustomersList="@{customersViewModel.pagedLiveData}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="@{customersViewModel.dataStatus == dataStatus.FETCHED ? view.VISIBLE : view.INVISIBLE}"
+                tools:listitem="@layout/customer_list_item" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/connection_error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{customersViewModel.dataStatus == dataStatus.ERROR ? view.VISIBLE : view.INVISIBLE}">
+
+            <ImageView
+                android:id="@+id/no_connection_img"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:contentDescription="@string/no_internet_connection"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_wifi_off_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/no_internet_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_internet_connection_text"
+                android:textAppearance="@style/Headline5"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toTopOf="@id/no_internet_subText"
+                app:layout_constraintEnd_toEndOf="@+id/no_connection_img"
+                app:layout_constraintStart_toStartOf="@+id/no_connection_img"
+                app:layout_constraintTop_toBottomOf="@id/no_connection_img" />
+
+            <TextView
+                android:id="@+id/no_internet_subText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_internet_connection_subText"
+                android:textAppearance="@style/Subtitle2"
+                android:textColor="@color/secondary_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/no_internet_text"
+                app:layout_constraintStart_toStartOf="@+id/no_internet_text"
+                app:layout_constraintTop_toBottomOf="@id/no_internet_text" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -1,9 +1,5 @@
 package com.shouman.apps.reseller.admin.domain
 
-import androidx.room.Embedded
-import androidx.room.Relation
-import com.shouman.apps.reseller.admin.data.model.DatabaseBranch
-import com.shouman.apps.reseller.admin.data.model.DatabaseSalesman
 import com.shouman.apps.reseller.admin.data.model.SalesmanStatus
 
 data class DomainBranch(
@@ -32,5 +28,45 @@ class DomainBranchSalesmen(
     val databaseBranch: DomainBranch,
 
     val salesmenList: List<DomainSalesman>
+)
+
+data class DomainCustomer(
+
+    val id: Long,
+
+    val createTime: Long,
+
+    val createdBy: String,
+
+    val customerName: String,
+
+    val superVisor: String,
+
+    val businessName: String,
+
+    val phoneNum: String,
+
+    val email: String?,
+
+    val latitude: Double,
+
+    val longitude: Double,
+
+    val visitsSet: MutableSet<DomainVisit> = HashSet()
+)
+
+data class DomainVisit(
+
+    val id: Long,
+
+    val createTime: Long,
+
+    val createdBy: String,
+
+    val invoiceNum: Long?,
+
+    val invoiceBalance: Int,
+
+    val invoiceCash: Int
 )
 

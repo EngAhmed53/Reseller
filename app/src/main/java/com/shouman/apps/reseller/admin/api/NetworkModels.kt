@@ -69,6 +69,16 @@ data class ServerSalesman(
     val salesmanStatus: SalesmanStatus
 )
 
+data class PageableCustomer(
+    val id: Long,
+
+    val belongToSalesman:String,
+
+    val customerName: String,
+
+    val companyName: String
+)
+
 fun Set<ServerBranch>.toDatabaseModels(): List<DatabaseBranchSalesmen> {
     return map { serverBranch ->
 

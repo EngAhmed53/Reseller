@@ -1,5 +1,7 @@
 package com.shouman.apps.reseller.admin.dataBindingAdapters
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
@@ -8,12 +10,15 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker
 import com.shouman.apps.reseller.admin.R
 import com.shouman.apps.reseller.admin.adapters.BranchesListAdapter
+import com.shouman.apps.reseller.admin.adapters.CustomersPagedListAdapter
 import com.shouman.apps.reseller.admin.adapters.SpinnerArrayAdapter
+import com.shouman.apps.reseller.admin.api.PageableCustomer
 import com.shouman.apps.reseller.admin.data.model.MiniDatabaseBranch
 import com.shouman.apps.reseller.admin.domain.DomainBranchSalesmen
 import com.shouman.apps.reseller.admin.ui.auth.completeUserInfo.CompleteUserInfoViewModel
@@ -21,6 +26,7 @@ import com.shouman.apps.reseller.admin.ui.auth.completeUserInfo.UploadInfoStatus
 import com.shouman.apps.reseller.admin.ui.auth.entryScreen.SignInStatus
 import com.shouman.apps.reseller.admin.ui.main.newSalesmanFragment.NewSalesmanViewModel
 import com.shouman.apps.reseller.admin.ui.main.teamFragment.DataStatus
+import com.shouman.apps.reseller.admin.utils.getRandomColor
 
 
 @BindingAdapter("status")
@@ -105,8 +111,10 @@ fun CountryCodePicker.setCompletePhoneNumber(
 
 @BindingAdapter("setBranchesList")
 fun RecyclerView.setBranchesList(branchesList: List<DomainBranchSalesmen>?) {
-    val adapter = adapter as BranchesListAdapter
-    adapter.submitList(branchesList)
+    branchesList?.let {
+        val adapter = adapter as BranchesListAdapter
+        adapter.submitList(branchesList)
+    }
 }
 
 @BindingAdapter("setRecVisibility")
@@ -149,7 +157,10 @@ fun TextView.setBranchesErrorTextVisibility(dataStatus: DataStatus?) {
 
 
 @BindingAdapter(value = ["miniBranchesList", "newSalesViewModel"])
-fun AppCompatAutoCompleteTextView.setMiniBranchesList(miniBranchesList: List<MiniDatabaseBranch>?, newSalesViewModel: NewSalesmanViewModel) {
+fun AppCompatAutoCompleteTextView.setMiniBranchesList(
+    miniBranchesList: List<MiniDatabaseBranch>?,
+    newSalesViewModel: NewSalesmanViewModel
+) {
     miniBranchesList?.let {
         val adapter = adapter as SpinnerArrayAdapter<MiniDatabaseBranch>
         adapter.addAll(*it.toTypedArray())
@@ -158,5 +169,21 @@ fun AppCompatAutoCompleteTextView.setMiniBranchesList(miniBranchesList: List<Min
             setText(miniBranchesList[position].name, false)
             newSalesViewModel.selectedBranchId.value = miniBranchesList[position].id
         }
+    }
+}
+
+@BindingAdapter("setBackgroundTint")
+fun FrameLayout.setBackgroundTint(position: Int?) {
+    position?.let {
+        backgroundTintList = ColorStateList.valueOf(Color.parseColor(getRandomColor(position)))
+    }
+}
+
+
+@BindingAdapter("setCustomersList")
+fun RecyclerView.setCustomersList(customersList: PagedList<PageableCustomer>?) {
+    customersList?.let {
+        val adapter = adapter as CustomersPagedListAdapter
+        adapter.submitList(customersList)
     }
 }

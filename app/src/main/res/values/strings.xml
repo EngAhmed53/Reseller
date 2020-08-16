@@ -13,7 +13,7 @@
     <string name="slogan">An Easy, Smart Sales teams and Customers Control System</string>
     <string name="continue_btn">Continue</string>
     <string name="please_type_company_name">Please type your Company name</string>
-    <string name="company_name">Company Name</string>
+    <string name="company_name">Business name</string>
     <string name="create_new_account">Create an account</string>
     <string name="i_already_have_account">I already have an account</string>
     <string name="blank_email_error">your e address can\'t be blank</string>
@@ -123,7 +123,7 @@
     <string name="sort_by_name_z_a">by name ▲</string>
     <string name="sort_by_date_a_z">by date ▼</string>
     <string name="sort_by_date_z_a">by date ▲</string>
-    <string name="company_customers_list">Press on any customer to view his information, or do a long press to view the action menu.</string>
+    <string name="company_customers_list">All company customers, Press on customer to view more information.</string>
     <string name="customer_total_visits">Total Visits</string>
     <string name="number_of_customers">Number Of Customers</string>
     <string name="log_entry_status">Log Entry Status</string>
@@ -238,7 +238,17 @@
     <string name="saving_new_branch_error">Error while saving the new branch.</string>
     <string name="saved_successfully">Saved Successfully.</string>
     <string name="select_branch">Select Branch</string>
-    <string name="building_invit_link_faild">Building invitaion link failed, Check your internet connection.</string>
+    <string name="building_invite_link_failed">Building invitation link failed, Check your internet connection.</string>
+    <string name="customers_search">customers search</string>
+    <string name="no_internet_connection_text">No internet connection</string>
+    <string name="no_internet_connection_subText">Could\'t download content, maybe your connection is down? Pull to try again.</string>
+    <string name="superVisor_name">Supervisor</string>
+    <string name="invoice_number">Invoice number</string>
+    <string name="invoice_price">Invoice price</string>
+    <string name="payment">Payment</string>
+    <string name="basic_info">Basic Info</string>
+    <string name="visit_info">Visit info</string>
+    <string name="contact_info">Contact info</string>
 
 
 </resources>

@@ -51,5 +51,37 @@ class Validator {
             return (position != -1L)
 
         }
+
+        fun isCustomerNameValid(customerName: String?): Boolean {
+            return !(customerName == null || customerName.trim().length < 10)
+        }
+
+        fun isBusinessNameValid(businessName: String?): Boolean {
+            return !(businessName == null || businessName.trim().length < 5)
+        }
+
+        fun isSuperVisorNameValid(supervisor: String?): Boolean {
+            return isCustomerNameValid(supervisor)
+        }
+
+        fun isEmailValidOrEmpty(email: String?): Boolean {
+            email?.let {
+                return isEmailValidOrEmpty(email) || email.trim().isEmpty()
+            }
+            return true
+        }
+
+        fun isCustomerInfoValid(
+            customerName: String?,
+            businessName: String?,
+            supervisor: String?,
+            phoneNumber: String?,
+            email: String?
+        ): Boolean {
+            return isCustomerNameValid(customerName) && isBusinessNameValid(businessName) && isSuperVisorNameValid(
+                supervisor
+            ) && isPhoneValid(phoneNumber) && isEmailValidOrEmpty(email)
+        }
+
     }
 }
