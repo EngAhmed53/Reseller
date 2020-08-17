@@ -8,49 +8,27 @@
 
         <variable
             name="newCustomerViewModel"
-            type="com.shouman.apps.reseller.admin.ui.main.newCustomerFragment.NewCustomerkViewModel" />
+            type="com.shouman.apps.reseller.admin.ui.main.newCustomerFragment.NewCustomerViewModel" />
 
         <variable
             name="validator"
             type="com.shouman.apps.reseller.admin.utils.Validator" />
 
         <variable
-            name="name"
-            type="String" />
-
+            name="customer"
+            type="com.shouman.apps.reseller.admin.domain.DomainCustomer" />
         <variable
-            name="business"
-            type="String" />
-
-        <variable
-            name="supervisor"
-            type="String" />
-
-        <variable
-            name="phone"
-            type="String" />
-
-        <variable
-            name="email"
-            type="String" />
-
-        <variable
-            name="invoice"
-            type="String" />
-
-        <variable
-            name="price"
-            type="String" />
-
-        <variable
-            name="payment"
-            type="String" />
+            name="visit"
+            type="com.shouman.apps.reseller.admin.domain.DomainVisit" />
 
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -62,34 +40,61 @@
             app:elevation="0dp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
 
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/materialToolbar"
-                style="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:backgroundTint="@android:color/transparent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_scrollFlags="exitUntilCollapsed"
-                app:navigationIcon="@drawable/ic_close" />
+                android:layout_height="match_parent"
+                app:contentScrim="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <TextView
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/material_blue"
-                android:gravity="center"
-                android:text="@string/new_salesman_header"
-                android:textAllCaps="true"
-                android:textAppearance="@style/Headline4"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_scrollFlags="scroll|enterAlways|snap" />
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/material_blue"
+                    android:gravity="center"
+                    android:text="@string/new_salesman_header"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/Headline4"
+                    android:textColor="@color/white"
+                    app:layout_collapseMode="parallax"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/materialToolbar"
+                    style="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:backgroundTint="@color/colorAccent2"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/ic_close" />
+                <Button
+                    android:id="@+id/share_branch"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:enabled="@{validator.Companion.isCustomerInfoValid(customer.customerName, customer.businessName, customer.supervisor, customer.phone, customer.email)}"
+                    android:onClick="@{() -> newCustomerViewModel.createCustomer()}"
+                    android:textAppearance="@style/Button"
+                    android:textColor="@{validator.Companion.isCustomerInfoValid(customer.customerName, customer.businessName, customer.supervisor, customer.phone, customer.email) ? @color/primary_text : @color/secondary_text}"
+                    android:layout_gravity="bottom|end"
+                    android:text="@string/continue_btn"
+                    android:layout_marginEnd="8dp"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -105,18 +110,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textAppearance="@style/Large"
-                    android:text="@string/basic_info"
-                    android:layout_marginTop="8dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:padding="8dp"/>
+                    android:padding="8dp"
+                    android:text="@string/basic_info"
+                    android:textAppearance="@style/Large"
+                    android:textColor="@color/primary_text" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp">
 
                     <ImageView
@@ -127,15 +133,15 @@
                         android:layout_marginEnd="8dp"
                         android:scaleType="center"
                         android:src="@drawable/ic_person_36dp"
-                        android:tint="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/customer_name_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/customer_name_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -157,7 +163,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/icon"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:setEndIconActive="@{validator.Companion.isCustomerNameValid(name)}">
+                        app:setEndIconActive="@{validator.Companion.isCustomerNameValid(customer.customerName)}">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_customer_name"
@@ -166,7 +172,7 @@
                             android:inputType="text"
                             android:maxLength="100"
                             android:maxLines="1"
-                            android:text="@={name}"
+                            android:text="@={customer.customerName}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -177,6 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp">
 
                     <ImageView
@@ -187,15 +194,15 @@
                         android:layout_marginEnd="8dp"
                         android:scaleType="center"
                         android:src="@drawable/ic_branch_36dp"
-                        android:tint="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/customer_company_name_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/customer_company_name_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -217,7 +224,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/icon2"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:setEndIconActive="@{validator.Companion.isBusinessNameValid(business)}">
+                        app:setEndIconActive="@{validator.Companion.isBusinessNameValid(customer.businessName)}">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/customer_company_name_edt"
@@ -226,7 +233,7 @@
                             android:inputType="text"
                             android:maxLength="100"
                             android:maxLines="1"
-                            android:text="@={business}"
+                            android:text="@={customer.businessName}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -237,7 +244,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp">
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp">
 
                     <ImageView
                         android:id="@+id/icon5"
@@ -246,16 +254,16 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_supervisor"
-                        android:tint="@color/gray1"
+                        android:src="@drawable/ic_subervisor"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/superVisor_name_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/superVisor_name_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -269,15 +277,13 @@
                         app:endIconDrawable="@drawable/ic_round_check_24"
                         app:endIconMode="custom"
                         app:endIconTint="@color/colorAccent"
-
-
                         app:hintTextAppearance="@style/Caption"
                         app:hintTextColor="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/icon5"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:setEndIconActive="@{validator.Companion.isSuperVisorNameValid(supervisor)}">
+                        app:setEndIconActive="@{validator.Companion.isSuperVisorNameValid(customer.supervisor)}">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/superVisor_name_edt"
@@ -286,7 +292,7 @@
                             android:inputType="text"
                             android:maxLength="100"
                             android:maxLines="1"
-                            android:text="@={supervisor}"
+                            android:text="@={customer.supervisor}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -304,18 +310,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textAppearance="@style/Large"
-                    android:text="@string/contact_info"
-                    android:layout_marginTop="8dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:padding="8dp"/>
+                    android:padding="8dp"
+                    android:text="@string/contact_info"
+                    android:textAppearance="@style/Large"
+                    android:textColor="@color/primary_text" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp">
 
                     <ImageView
@@ -324,18 +331,17 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-
                         android:scaleType="center"
                         android:src="@drawable/ic_phone_black_36dp"
-                        android:tint="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/customer_phone_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/customer_phone_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -349,15 +355,13 @@
                         app:endIconDrawable="@drawable/ic_round_check_24"
                         app:endIconMode="custom"
                         app:endIconTint="@color/colorAccent"
-
-
                         app:hintTextAppearance="@style/Caption"
                         app:hintTextColor="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/icon3"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:setEndIconActive="@{validator.Companion.isPhoneValid(phone)}">
+                        app:setEndIconActive="@{validator.Companion.isPhoneValid(customer.phone)}">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/customer_phone_edt"
@@ -366,7 +370,7 @@
                             android:inputType="phone"
                             android:maxLength="100"
                             android:maxLines="1"
-                            android:text="@={phone}"
+                            android:text="@={customer.phone}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -379,7 +383,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp">
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp">
 
                     <ImageView
                         android:id="@+id/icon4"
@@ -389,15 +394,15 @@
                         android:layout_marginEnd="8dp"
                         android:scaleType="center"
                         android:src="@drawable/ic_email_36dp"
-                        android:tint="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/customer_email_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/customer_email_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -411,15 +416,13 @@
                         app:endIconDrawable="@drawable/ic_round_check_24"
                         app:endIconMode="custom"
                         app:endIconTint="@color/colorAccent"
-
-
                         app:hintTextAppearance="@style/Caption"
                         app:hintTextColor="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/icon4"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:setEndIconActive="@{validator.Companion.isEmailValidOrEmpty(email)}">
+                        app:setEndIconActive="@{validator.Companion.isEmailValidOrEmpty(customer.email)}">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_customer_email"
@@ -428,7 +431,7 @@
                             android:inputType="textEmailAddress"
                             android:maxLength="100"
                             android:maxLines="1"
-                            android:text="@={email}"
+                            android:text="@={customer.email}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -444,18 +447,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textAppearance="@style/Large"
-                    android:text="@string/visit_info"
-                    android:layout_marginTop="8dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:padding="8dp"/>
+                    android:padding="8dp"
+                    android:text="@string/visit_info"
+                    android:textAppearance="@style/Large"
+                    android:textColor="@color/primary_text" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp">
 
                     <ImageView
@@ -466,15 +470,15 @@
                         android:layout_marginEnd="8dp"
                         android:scaleType="center"
                         android:src="@drawable/ic_invoice_num"
-                        android:tint="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/invoice_num_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/invoice_num_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -498,7 +502,7 @@
                             android:inputType="number"
                             android:maxLength="100"
                             android:maxLines="1"
-                            android:text="@={invoice}"
+                            android:text="@={visit.invoiceNum}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -509,6 +513,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp">
 
                     <ImageView
@@ -519,15 +524,15 @@
                         android:layout_marginEnd="8dp"
                         android:scaleType="center"
                         android:src="@drawable/ic_baseline_attach_money_24"
-                        android:tint="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/invoice_price_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/invoice_price_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -551,7 +556,7 @@
                             android:inputType="numberDecimal"
                             android:maxLength="100"
                             android:maxLines="1"
-                            android:text="@={price}"
+                            android:text="@={visit.invoicePrice}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -562,6 +567,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginEnd="16dp">
 
                     <ImageView
@@ -572,15 +578,15 @@
                         android:layout_marginEnd="8dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_payment_24"
-                        android:tint="@color/gray1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/payment_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/payment_txtInput"
-                        style="@style/materialInputLayoutCustomColor"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -601,31 +607,16 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
-                            android:text="@={payment}"
                             android:inputType="numberDecimal"
                             android:maxLength="100"
                             android:maxLines="1"
+                            android:text="@={visit.payment}"
                             android:textColor="@color/gray1"
                             android:textColorHint="@color/gray1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Button
-                    android:id="@+id/btc_continue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:elevation="4dp"
-                    android:enabled="@{validator.Companion.isCustomerInfoValid(name, business, supervisor, phone, email)}"
-                    android:onClick="@{() -> newCustomerViewModel.addNewCustomer(name, supervisor, business, phone, email)}"
-                    android:paddingLeft="64dp"
-                    android:paddingRight="64dp"
-                    android:text="@string/continue_btn"
-                    android:textAllCaps="true" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

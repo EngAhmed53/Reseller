@@ -46,7 +46,7 @@
     <string name="customer_email">Email</string>
     <string name="phone">Phone</string>
     <string name="added_time">Added time</string>
-    <string name="google_maps_key" translatable="false">AIzaSyABpiW13-2gPYkgXVyzFypJTQIW1me4Y1s</string>
+    <string name="google_maps_key" translatable="false">AIzaSyARB7_GiBI9G9k5FXSr2fOYRRrZS-469JY</string>
 
     <string name="edit_company_info">Edit Company Info</string>
 
@@ -249,6 +249,4 @@
     <string name="basic_info">Basic Info</string>
     <string name="visit_info">Visit info</string>
     <string name="contact_info">Contact info</string>
-
-
 </resources>

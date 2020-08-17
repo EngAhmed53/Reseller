@@ -8,7 +8,7 @@
 
         <variable
             name="newVisitViewModel"
-            type="com.shouman.apps.reseller.admin.ui.main.newCustomerFragment.NewCustomerkViewModel" />
+            type="com.shouman.apps.reseller.admin.ui.main.newVisitFragment.NewVisitViewModel" />
 
         <variable
             name="validator"

@@ -23,7 +23,7 @@ class NewVisitFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NewVisitViewModel::class.java)
-        // TODO: Use the ViewModel
+
     }
 
 }

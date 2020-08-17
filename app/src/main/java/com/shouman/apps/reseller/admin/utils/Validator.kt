@@ -65,10 +65,8 @@ class Validator {
         }
 
         fun isEmailValidOrEmpty(email: String?): Boolean {
-            email?.let {
-                return isEmailValidOrEmpty(email) || email.trim().isEmpty()
-            }
-            return true
+            if (email.isNullOrEmpty()) return true
+            return isEmailValid(email)
         }
 
         fun isCustomerInfoValid(

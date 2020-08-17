@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="locationViewModel"
+            type="com.shouman.apps.reseller.admin.ui.main.pickLocationFragment.PickLocationViewModel" />
+
+        <variable
+            name="customer"
+            type="com.shouman.apps.reseller.admin.domain.DomainCustomer" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        tools:context=".ui.main.salesUI.add.newCustomerFragments.Fragment_pick_customer_location">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/my_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_my_location"
+            app:backgroundTint="@color/white"
+            app:elevation="6dp"
+            app:fabSize="mini"
+            android:onClick="@{() -> locationViewModel.updateLocation()}"
+            android:enabled="@{locationViewModel.isLocationReady()}"
+            app:fab_colorPressed="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/pick_location_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:pressedTranslationZ="12dp"
+            app:rippleColor="@color/white_blue"
+            app:tint="@color/black" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="@{locationViewModel.isLocationReady? view.INVISIBLE : view.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/map"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/pick_location_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:enabled="@{locationViewModel.isLocationReady()}"
+            android:text="@string/pick_location"
+            app:layout_constraintBottom_toBottomOf="@+id/map"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

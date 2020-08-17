@@ -4,25 +4,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.shouman.apps.reseller.admin.R
+import com.shouman.apps.reseller.admin.databinding.FragmentNewCustomerBinding
 
-class NewCustomerFragment : BottomSheetDialogFragment() {
+class NewCustomerFragment : Fragment() {
 
-    private lateinit var viewModel: NewCustomerkViewModel
+    private val viewModel: NewCustomerViewModel by navGraphViewModels(R.id.main_nav)
+    private lateinit var mBinding: FragmentNewCustomerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_new_customer, container, false)
-    }
+        mBinding = FragmentNewCustomerBinding.inflate(inflater)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(NewCustomerkViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
+
+        mBinding.lifecycleOwner = this
+
+        mBinding.newCustomerViewModel = viewModel
+        mBinding.customer = viewModel.customer
+        mBinding.visit = viewModel.visit
+
+        viewModel.customerMutableLiveData.observe(viewLifecycleOwner, Observer { customer ->
+            customer?.let {
+                val toPickLocation = NewCustomerFragmentDirections.actionNewCustomerFragmentToFragmentPickLocation(customer)
+                findNavController().navigate(toPickLocation)
+                viewModel.restoreCustomerObject()
+            }
+        })
+
+        mBinding.materialToolbar.setNavigationOnClickListener {
+         findNavController().popBackStack()
+        }
+
+        return mBinding.root
+    }
 }

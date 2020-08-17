@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shouman.apps.reseller.admin.R
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 when (position) {
                     0, 3, 4 -> {
                         mBinding.actionFab.hide()
-                        mBinding.subActionFab.hide ()
+                        mBinding.subActionFab.hide()
                     }
                     1 -> {
                         //team main fab
@@ -141,5 +142,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun addNewCustomerFragment() {
 
+        /**
+         * Clear previous viewModels to empty eny edit text in the newCustomerFragment
+         */
+        findNavController(R.id.main_container).getViewModelStoreOwner(R.id.main_nav).viewModelStore.clear()
+
+
+        val toNewCustomerFragment =
+            TransparentFragmentDirections.actionTransparentFragmentToNewCustomerFragment()
+        findNavController(R.id.main_container).navigate(toNewCustomerFragment)
+        mainViewModel.subFabActionDon()
     }
 }

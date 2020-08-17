@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shouman.apps.reseller.admin">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera"
         android:required="false" />
@@ -44,7 +45,9 @@
             </intent-filter>
         </activity>
 
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <!--        &lt;!&ndash;FCM&ndash;&gt;-->
         <!--        <meta-data-->

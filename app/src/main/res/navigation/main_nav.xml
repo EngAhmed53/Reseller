@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/transparentFragment">
+
+    <fragment
+        android:id="@+id/transparentFragment"
+        android:name="com.shouman.apps.reseller.admin.ui.main.TransparentFragment"
+        android:label="fragment_transparent"
+        tools:layout="@layout/fragment_transparent" >
+        <action
+            android:id="@+id/action_transparentFragment_to_newCustomerFragment"
+            app:destination="@id/newCustomerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newCustomerFragment"
+        android:name="com.shouman.apps.reseller.admin.ui.main.newCustomerFragment.NewCustomerFragment"
+        android:label="NewCustomerFragment" >
+        <action
+            android:id="@+id/action_newCustomerFragment_to_fragmentPickLocation"
+            app:destination="@id/fragmentPickLocation" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPickLocation"
+        android:name="com.shouman.apps.reseller.admin.ui.main.pickLocationFragment.FragmentPickLocation"
+        android:label="FragmentPickLocation" >
+        <argument
+            android:name="customer"
+            app:argType="com.shouman.apps.reseller.admin.domain.DomainCustomer"
+            app:nullable="true" />
+    </fragment>
+
+
+</navigation>
