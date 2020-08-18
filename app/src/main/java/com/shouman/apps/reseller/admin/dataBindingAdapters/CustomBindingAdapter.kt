@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.AndroidViewModel
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
@@ -19,12 +20,15 @@ import com.shouman.apps.reseller.admin.adapters.BranchesListAdapter
 import com.shouman.apps.reseller.admin.adapters.CustomersPagedListAdapter
 import com.shouman.apps.reseller.admin.adapters.SpinnerArrayAdapter
 import com.shouman.apps.reseller.admin.api.PageableCustomer
+import com.shouman.apps.reseller.admin.data.model.DatabaseCustomer
 import com.shouman.apps.reseller.admin.data.model.MiniDatabaseBranch
 import com.shouman.apps.reseller.admin.domain.DomainBranchSalesmen
 import com.shouman.apps.reseller.admin.ui.auth.completeUserInfo.CompleteUserInfoViewModel
 import com.shouman.apps.reseller.admin.ui.auth.completeUserInfo.UploadInfoStatus
 import com.shouman.apps.reseller.admin.ui.auth.entryScreen.SignInStatus
+import com.shouman.apps.reseller.admin.ui.main.newCustomerFragment.NewCustomerViewModel
 import com.shouman.apps.reseller.admin.ui.main.newSalesmanFragment.NewSalesmanViewModel
+import com.shouman.apps.reseller.admin.ui.main.newVisitFragment.NewVisitViewModel
 import com.shouman.apps.reseller.admin.ui.main.teamFragment.DataStatus
 import com.shouman.apps.reseller.admin.utils.getRandomColor
 
@@ -156,10 +160,10 @@ fun TextView.setBranchesErrorTextVisibility(dataStatus: DataStatus?) {
 }
 
 
-@BindingAdapter(value = ["miniBranchesList", "newSalesViewModel"])
+@BindingAdapter(value = ["miniBranchesList", "viewModel"])
 fun AppCompatAutoCompleteTextView.setMiniBranchesList(
     miniBranchesList: List<MiniDatabaseBranch>?,
-    newSalesViewModel: NewSalesmanViewModel
+    viewModel: AndroidViewModel
 ) {
     miniBranchesList?.let {
         val adapter = adapter as SpinnerArrayAdapter<MiniDatabaseBranch>
@@ -167,7 +171,35 @@ fun AppCompatAutoCompleteTextView.setMiniBranchesList(
 
         setOnItemClickListener { _, _, position, _ ->
             setText(miniBranchesList[position].name, false)
-            newSalesViewModel.selectedBranchId.value = miniBranchesList[position].id
+
+            when (viewModel) {
+                is NewSalesmanViewModel -> viewModel.selectedBranchId.value =
+                    miniBranchesList[position].id
+                is NewCustomerViewModel -> viewModel.selectedBranchId.value =
+                    miniBranchesList[position].id
+            }
+        }
+    }
+}
+
+
+@BindingAdapter(value = ["customersList", "viewModel"])
+fun AppCompatAutoCompleteTextView.setCustomersList(
+    customersList: List<DatabaseCustomer>?,
+    viewModel: NewVisitViewModel
+) {
+    customersList?.let {
+        val adapter = adapter as SpinnerArrayAdapter<DatabaseCustomer>
+        adapter.addAll(*it.toTypedArray())
+
+        setOnItemClickListener { _, _, position, _ ->
+            val txt =
+                "${customersList[position].customerName}, ${customersList[position].businessName}"
+            setText(txt, false)
+
+            viewModel.selectedCustomerId.value = customersList[position].id
+
+            viewModel.selectedCustomer = customersList[position]
         }
     }
 }

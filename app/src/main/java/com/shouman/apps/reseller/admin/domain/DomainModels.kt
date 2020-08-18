@@ -4,6 +4,8 @@ import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.shouman.apps.reseller.admin.BR
+import com.shouman.apps.reseller.admin.api.ServerCustomer
+import com.shouman.apps.reseller.admin.api.ServerVisit
 import com.shouman.apps.reseller.admin.data.model.SalesmanStatus
 import kotlinx.android.parcel.Parcelize
 
@@ -44,6 +46,8 @@ data class DomainCustomer(
 
     val createdBy: String,
 
+    var branchId: Long?,
+
     private var _customerName: String,
 
     private var _supervisor: String,
@@ -54,11 +58,11 @@ data class DomainCustomer(
 
     private var _email: String?,
 
-    val latitude: Double?,
+    var latitude: Double?,
 
-    val longitude: Double?,
+    var longitude: Double?,
 
-    val visitsSet: MutableSet<DomainVisit> = HashSet()
+    var visit: DomainVisit?
 ) : Parcelable, BaseObservable() {
 
     var customerName
@@ -102,6 +106,8 @@ data class DomainVisit(
 
     val id: Long,
 
+    var customerId: Long?,
+
     var createTime: Long,
 
     val createdBy: String,
@@ -118,7 +124,7 @@ data class DomainVisit(
         set(value) {
             _invoiceNum = try {
                 value?.toLong()
-            }catch (e:java.lang.NumberFormatException) {
+            } catch (e: java.lang.NumberFormatException) {
                 null
             }
             notifyPropertyChanged(BR.invoiceNum)
@@ -148,6 +154,28 @@ data class DomainVisit(
         }
 }
 
+fun DomainCustomer.toServerCustomer(): ServerCustomer {
+    return ServerCustomer(
+        id,
+        createTime,
+        createdBy,
+        customerName, supervisor, businessName,
+        phone, email,
+        latitude!!, longitude!!,
+        HashSet<ServerVisit>().apply {
+            add(visit!!.toServerVisit())
+        }
+    )
+}
 
+fun DomainVisit.toServerVisit(): ServerVisit {
+    return ServerVisit(
+        id,
+        createTime, createdBy,
+        invoiceNum?.toLong(),
+        invoicePrice?.toInt() ?: 0,
+        payment?.toInt() ?: 0
+    )
+}
 
 

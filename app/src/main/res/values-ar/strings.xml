@@ -150,7 +150,7 @@
     <string name="customer_deleted">تم مسح العميل بنجاح!</string>
     <string name="delete_customer_forever">مسح الي الأبد</string>
     <string name="move_selected_to">نقل العملاء المختارون الي</string>
-    <string name="multi_customers_subheader">إختر المندوب الجديد المراد نقل العملاء اليه، ثم إضغط علي زر نقل.</string>
+    <string name="multi_customers_subHeader">إختر المندوب الجديد المراد نقل العملاء اليه، ثم إضغط علي زر نقل.</string>
     <string name="profile">حسابي</string>
     <string name="about">عن البرنامج</string>
     <string name="daily_log">التقرير اليومي</string>
@@ -243,5 +243,10 @@
     <string name="basic_info">Basic Info</string>
     <string name="visit_info">Visit info</string>
     <string name="contact_info">Contact info</string>
+    <string name="company_id_not_valid">Your company id is not valid.</string>
+    <string name="branch_id_not_valid">Branch id is not valid, please select a valid branch to add this customer to it.</string>
+    <string name="location_not_identical">Locations not Identical</string>
+    <string name="customer_id_not_valid">Customer Id not valid, please select a valid customer id to continue.</string>
+    <string name="customer_location">Customer location</string>
 
 </resources>

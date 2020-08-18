@@ -10,8 +10,10 @@ enum class ResponseCode {
     SUCCESS,
     FIREBASE_CODE_NOT_VALID,
     COMPANY_ID_NOT_VALID,
+    BRANCH_ID_NOT_VALID,
     NEW_USER_NOT_VALID,
-    NEW_USER_INFO_NOT_VALID
+    NEW_USER_INFO_NOT_VALID,
+    CUSTOMER_ID_NOT_VALID
 }
 
 data class ServerResponse<T>(val responseCode: ResponseCode, val body: T?)
@@ -110,3 +112,44 @@ fun ServerBranch.toDatabaseBranch(): DatabaseBranch {
         city
     )
 }
+
+
+data class ServerCustomer(
+
+    val id: Long,
+
+    val createTime: Long,
+
+    val createdBy: String,
+
+    val customerName: String,
+
+    val superVisor: String,
+
+    val businessName: String,
+
+    val phoneNum: String,
+
+    val email: String?,
+
+    val latitude: Double,
+
+    val longitude: Double,
+
+    val visitsSet: MutableSet<ServerVisit> = HashSet()
+)
+
+data class ServerVisit(
+
+    val id: Long,
+
+    val createTime: Long,
+
+    val createdBy: String,
+
+    val invoiceNum: Long?,
+
+    val invoiceBalance: Int,
+
+    val invoiceCash: Int
+)

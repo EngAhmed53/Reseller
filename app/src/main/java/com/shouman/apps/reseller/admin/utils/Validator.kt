@@ -81,5 +81,8 @@ class Validator {
             ) && isPhoneValid(phoneNumber) && isEmailValidOrEmpty(email)
         }
 
+        fun isSelectedCustomerValid(position:Long):Boolean {
+            return isSelectedBranchValid(position)
+        }
     }
 }

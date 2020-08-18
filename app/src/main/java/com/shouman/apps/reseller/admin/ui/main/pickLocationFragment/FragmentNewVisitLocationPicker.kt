@@ -15,20 +15,25 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.shouman.apps.reseller.admin.R
-import com.shouman.apps.reseller.admin.databinding.FragmentPickLocationBinding
+import com.shouman.apps.reseller.admin.databinding.FragmentNewVisitLocationPickerBinding
 
-class FragmentPickLocation : Fragment(), OnMapReadyCallback {
+
+class FragmentNewVisitLocationPicker : Fragment(), OnMapReadyCallback {
 
     private val LOCATION_REQUEST = 225
     private val MY_PERMISSIONS_ACCESS_FINE_LOCATION = 220
 
     private lateinit var viewModel: PickLocationViewModel
-    private lateinit var mBinding: FragmentPickLocationBinding
+    private lateinit var uploadVisitViewModel: UploadVisitViewModel
+    private lateinit var mBinding: FragmentNewVisitLocationPickerBinding
 
     private var googleMap: GoogleMap? = null
 
@@ -37,14 +42,80 @@ class FragmentPickLocation : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = FragmentPickLocationBinding.inflate(inflater)
+        mBinding = FragmentNewVisitLocationPickerBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(PickLocationViewModel::class.java)
+        uploadVisitViewModel = ViewModelProvider(this).get(UploadVisitViewModel::class.java)
 
         setupMapView(savedInstanceState)
 
         mBinding.lifecycleOwner = this
         mBinding.locationViewModel = viewModel
-        mBinding.customer = FragmentPickLocationArgs.fromBundle(requireArguments()).customer
+        mBinding.uploadVisitViewModel = uploadVisitViewModel
+        mBinding.visit = FragmentNewVisitLocationPickerArgs.fromBundle(requireArguments()).visit
+
+        uploadVisitViewModel.customerLatLng =
+            FragmentNewVisitLocationPickerArgs.fromBundle(requireArguments()).customerLatLng
+
+
+        uploadVisitViewModel.uploadVisitStatus.observe(viewLifecycleOwner, Observer { status ->
+
+            when (status) {
+                AddNewVisitStatus.SUCCESS -> {
+                    val contextView = mBinding.root
+                    Snackbar.make(
+                        contextView,
+                        getString(R.string.saved_successfully),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .show()
+                    uploadVisitViewModel.restoreUploadStatus()
+                    //back to home fragment
+                    findNavController().popBackStack(R.id.transparentFragment, false)
+                }
+                AddNewVisitStatus.LOCATIONS_NOT_IDENTICAL -> {
+                    val contextView = mBinding.root
+                    Snackbar.make(
+                        contextView,
+                        getString(R.string.location_not_identical),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .show()
+                    uploadVisitViewModel.restoreUploadStatus()
+                }
+                AddNewVisitStatus.CUSTOMER_ID_NOT_VALID -> {
+                    val contextView = mBinding.root
+                    Snackbar.make(
+                        contextView,
+                        getString(R.string.customer_id_not_valid),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .show()
+                    uploadVisitViewModel.restoreUploadStatus()
+                }
+
+                AddNewVisitStatus.TIMED_OUT -> {
+                    val contextView = mBinding.root
+                    Snackbar.make(
+                        contextView,
+                        getString(R.string.connection_time_out),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .show()
+                    uploadVisitViewModel.restoreUploadStatus()
+                }
+                AddNewVisitStatus.ERROR -> {
+                    val contextView = mBinding.root
+                    Snackbar.make(
+                        contextView,
+                        getString(R.string.no_internet_connection),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .show()
+                    uploadVisitViewModel.restoreUploadStatus()
+                }
+                else -> return@Observer
+            }
+        })
 
         return mBinding.root
     }
@@ -71,7 +142,9 @@ class FragmentPickLocation : Fragment(), OnMapReadyCallback {
 
         viewModel.latLng.observe(viewLifecycleOwner, Observer { latLng ->
             latLng?.let {
-                showLocationOnMap(latLng)
+                showCurrentLocationOnMap(latLng)
+                showSavedLocationOnMap(uploadVisitViewModel.customerLatLng!!)
+                uploadVisitViewModel.fetchedLatLng = latLng
                 viewModel.restoreLatLngState()
             }
         })
@@ -97,7 +170,17 @@ class FragmentPickLocation : Fragment(), OnMapReadyCallback {
         googleMap!!.isBuildingsEnabled = true
     }
 
-    private fun showLocationOnMap(latLng: LatLng) {
+    fun showSavedLocationOnMap(latLng: LatLng) {
+        googleMap?.apply {
+            addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title(getString(R.string.customer_location))
+            )
+        }
+    }
+
+    private fun showCurrentLocationOnMap(latLng: LatLng) {
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18f)
         googleMap!!.moveCamera(cameraUpdate)
     }

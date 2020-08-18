@@ -2,12 +2,11 @@ package com.shouman.apps.reseller.admin.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import androidx.sqlite.db.SimpleSQLiteQuery
-import androidx.sqlite.db.SupportSQLiteQueryBuilder
 import com.shouman.apps.reseller.admin.data.model.DatabaseBranch
 import com.shouman.apps.reseller.admin.data.model.DatabaseBranchSalesmen
+import com.shouman.apps.reseller.admin.data.model.DatabaseCustomer
 import com.shouman.apps.reseller.admin.data.model.DatabaseSalesman
-import com.shouman.apps.reseller.admin.data.model.MiniDatabaseBranch
+import com.shouman.apps.reseller.admin.repository.paging.CustomerDataSource
 
 @Dao
 interface ResellerDAO {
@@ -73,4 +72,26 @@ interface ResellerDAO {
     fun updateSalesman(salesman: DatabaseSalesman)
 
 
+    /**
+     * get all the customers list, this list is used when we add a visit
+     * for existing customer to use its name, business name, latitude, longitude
+     */
+    @Query("SELECT * FROM customers")
+    fun getAllCustomerList(): LiveData<List<DatabaseCustomer>>
+
+    /**
+     * add the returned customer object returned from the server to database
+     */
+    @Insert
+    fun addCustomerToCustomersList(customer:DatabaseCustomer)
+
+    /**
+     *update all the customers list in the database,
+     * this update to ensure tha all the saved customers
+     * data [name, businessName, latitude, longitude]
+     * is up to date
+     */
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateAllCustomerList(vararg customerList: DatabaseCustomer)
 }

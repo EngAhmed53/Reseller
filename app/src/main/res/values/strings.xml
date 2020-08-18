@@ -153,7 +153,7 @@
     <string name="customer_deleted">Customer Deleted!</string>
     <string name="delete_customer_forever">Permanently Delete</string>
     <string name="move_selected_to">Move selected to</string>
-    <string name="multi_customers_subheader">Choose the new salesman to move selected customers to, then click move button.</string>
+    <string name="multi_customers_subHeader">Choose the new salesman to move selected customers to, then click move button.</string>
     <string name="profile">Profile</string>
     <string name="about">About</string>
     <string name="daily_log">Daily Log</string>
@@ -161,7 +161,7 @@
     <string name="create_new_customer">Create new customer</string>
     <string name="add_new_visit">Add new visit</string>
     <string name="pick_location">Pick Location</string>
-    <string name="select_customer">select customer</string>
+    <string name="select_customer">Select customer</string>
     <string name="all_data_synced">All customer data is synced!</string>
     <string name="active_internt_to_sync">Data saved locally, enable your internet connection to sync!</string>
     <string name="default_notification_channel_id" translatable="false">Resellers Application</string>
@@ -249,4 +249,9 @@
     <string name="basic_info">Basic Info</string>
     <string name="visit_info">Visit info</string>
     <string name="contact_info">Contact info</string>
+    <string name="company_id_not_valid">Your company id is not valid.</string>
+    <string name="branch_id_not_valid">Branch id is not valid, please select a valid branch to add this customer to it.</string>
+    <string name="location_not_identical">Locations not Identical</string>
+    <string name="customer_id_not_valid">Customer Id not valid, please select a valid customer to continue.</string>
+    <string name="customer_location">Customer location</string>
 </resources>

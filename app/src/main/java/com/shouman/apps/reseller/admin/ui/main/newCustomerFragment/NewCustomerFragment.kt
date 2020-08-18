@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.shouman.apps.reseller.admin.R
+import com.shouman.apps.reseller.admin.adapters.SpinnerArrayAdapter
+import com.shouman.apps.reseller.admin.data.model.MiniDatabaseBranch
 import com.shouman.apps.reseller.admin.databinding.FragmentNewCustomerBinding
 
 class NewCustomerFragment : Fragment() {
@@ -33,15 +34,24 @@ class NewCustomerFragment : Fragment() {
 
         viewModel.customerMutableLiveData.observe(viewLifecycleOwner, Observer { customer ->
             customer?.let {
-                val toPickLocation = NewCustomerFragmentDirections.actionNewCustomerFragmentToFragmentPickLocation(customer)
+                val toPickLocation =
+                    NewCustomerFragmentDirections.actionNewCustomerFragmentToFragmentNewCustomerLocationPicker(
+                        customer)
                 findNavController().navigate(toPickLocation)
                 viewModel.restoreCustomerObject()
             }
         })
 
         mBinding.materialToolbar.setNavigationOnClickListener {
-         findNavController().popBackStack()
+            findNavController().popBackStack()
         }
+
+        mBinding.filledExposedDropdown.setAdapter(
+            SpinnerArrayAdapter<MiniDatabaseBranch>(
+                requireContext(),
+                ArrayList()
+            )
+        )
 
         return mBinding.root
     }

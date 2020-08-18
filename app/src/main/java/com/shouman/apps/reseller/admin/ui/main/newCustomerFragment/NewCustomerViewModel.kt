@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.shouman.apps.reseller.admin.data.database.ResellerDatabase
 import com.shouman.apps.reseller.admin.domain.DomainCustomer
 import com.shouman.apps.reseller.admin.domain.DomainVisit
+import com.shouman.apps.reseller.admin.repository.BranchesRepository
 
 class NewCustomerViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -14,10 +16,21 @@ class NewCustomerViewModel(application: Application) : AndroidViewModel(applicat
         get() = _customerMutableLiveData
 
 
+    private val database = ResellerDatabase.getInstance(application)
+    private val branchesRepository = BranchesRepository(database)
+
+    val miniBranchesList = branchesRepository.miniDatabaseBranchesList
+
+    val selectedBranchId = MutableLiveData<Long?>().apply {
+        this.value = -1
+    }
+
+
     val customer = DomainCustomer(
         -555,
         0,
         "Admin",
+        null,
         "",
         "",
         "",
@@ -25,11 +38,12 @@ class NewCustomerViewModel(application: Application) : AndroidViewModel(applicat
         "",
         null,
         null,
-        HashSet()
+        null
     )
 
     val visit = DomainVisit(
         -555,
+        null,
         0,
         "Admin",
         null,
@@ -42,7 +56,8 @@ class NewCustomerViewModel(application: Application) : AndroidViewModel(applicat
     ) {
         visit.createTime = System.currentTimeMillis()
         customer.createTime = System.currentTimeMillis()
-        customer.visitsSet.add(visit)
+        customer.branchId = selectedBranchId.value
+        customer.visit = visit
 
         _customerMutableLiveData.value = customer
     }

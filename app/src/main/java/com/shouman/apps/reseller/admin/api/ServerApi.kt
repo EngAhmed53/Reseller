@@ -1,6 +1,7 @@
 package com.shouman.apps.reseller.admin.api
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.shouman.apps.reseller.admin.data.model.DatabaseCustomer
 import com.shouman.apps.reseller.admin.domain.DomainCustomer
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -103,8 +104,8 @@ interface CustomersApiServices {
     fun addNewCustomerByAdminAsync(
         @Path("companyId") companyId: Long,
         @Path("branchId") branchId: Long,
-        @Body customer: DomainCustomer
-    ): Deferred<ResponseCode>
+        @Body customer: ServerCustomer
+    ): Deferred<ServerResponse<DatabaseCustomer?>>
 
     @GET("companies/{companyId}/customers")
     fun getAllCustomersAsync(
@@ -112,6 +113,24 @@ interface CustomersApiServices {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Deferred<List<PageableCustomer>>
+}
+
+interface VisitsApiServices {
+
+    @POST("companies/{companyId}/customers/{customerId}/visits")
+    fun addNewVisitByAdminAsync(
+        @Path("companyId") companyId: Long,
+        @Path("customerId") customerId: Long,
+        @Body visit: ServerVisit
+    ): Deferred<ResponseCode>
+
+    @GET("companies/{companyId}/customers/{customerId}/visits")
+    fun getAllCustomersAsync(
+        @Path("companyId") companyID: Long,
+        @Path("customerId") customerId: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Deferred<List<ServerVisit>>
 }
 
 object NetworkCall {
@@ -125,5 +144,9 @@ object NetworkCall {
 
     val customersServices:CustomersApiServices by lazy {
         retrofit.create(CustomersApiServices::class.java)
+    }
+
+    val visitsServices:VisitsApiServices by lazy {
+        retrofit.create(VisitsApiServices::class.java)
     }
 }

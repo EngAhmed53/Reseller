@@ -68,7 +68,7 @@ class DatabaseBranchSalesmen(
     val salesmenList: List<DatabaseSalesman>
 )
 
-data class MiniDatabaseBranch(val id:Long, val name:String)
+data class MiniDatabaseBranch(val id: Long, val name: String)
 
 
 fun List<DatabaseBranchSalesmen>.toDomainModels(): List<DomainBranchSalesmen> {
@@ -90,6 +90,22 @@ fun List<DatabaseBranchSalesmen>.toDomainModels(): List<DomainBranchSalesmen> {
         )
     }
 }
+
+@Entity(tableName = "customers")
+data class DatabaseCustomer(
+    @PrimaryKey(autoGenerate = false)
+    val id: Long,
+
+    @ColumnInfo(name = "customer_name")
+    val customerName: String,
+
+    @ColumnInfo(name = "business_name")
+    val businessName: String,
+
+    val latitude: Double,
+
+    val longitude: Double
+)
 
 
 

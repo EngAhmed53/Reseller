@@ -28,6 +28,7 @@ class PickLocationViewModel(application: Application) : AndroidViewModel(applica
     val permissionState: LiveData<Boolean>
         get() = _permissionState
 
+
     private val fusedLocation: FusedLocationProviderClient? =
         LocationServices.getFusedLocationProviderClient(application)
 
@@ -78,7 +79,6 @@ class PickLocationViewModel(application: Application) : AndroidViewModel(applica
             Looper.getMainLooper()
         )
     }
-
 
     fun restorePermissionState() {
         _permissionState.value = null

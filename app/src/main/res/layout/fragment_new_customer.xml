@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -80,10 +81,10 @@
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
-                    android:enabled="@{validator.Companion.isCustomerInfoValid(customer.customerName, customer.businessName, customer.supervisor, customer.phone, customer.email)}"
+                    android:enabled="@{validator.Companion.isCustomerInfoValid(customer.customerName, customer.businessName, customer.supervisor, customer.phone, customer.email) &amp;&amp; validator.Companion.isSelectedBranchValid(newCustomerViewModel.selectedBranchId)}"
                     android:onClick="@{() -> newCustomerViewModel.createCustomer()}"
                     android:textAppearance="@style/Button"
-                    android:textColor="@{validator.Companion.isCustomerInfoValid(customer.customerName, customer.businessName, customer.supervisor, customer.phone, customer.email) ? @color/primary_text : @color/secondary_text}"
+                    android:textColor="@{validator.Companion.isCustomerInfoValid(customer.customerName, customer.businessName, customer.supervisor, customer.phone, customer.email) &amp;&amp; validator.Companion.isSelectedBranchValid(newCustomerViewModel.selectedBranchId) ? @color/primary_text : @color/secondary_text}"
                     android:layout_gravity="bottom|end"
                     android:text="@string/continue_btn"
                     android:layout_marginEnd="8dp"
@@ -193,7 +194,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_branch_36dp"
+                        android:src="@drawable/ic_business"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/customer_company_name_txtInput"
                         app:layout_constraintStart_toStartOf="parent"
@@ -322,7 +323,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp">
 
                     <ImageView
@@ -443,6 +443,83 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/white_ripple_color" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:padding="8dp"
+                    android:text="@string/select_branch"
+                    android:textAppearance="@style/Large"
+                    android:textColor="@color/primary_text" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/icon9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_branch_36dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/select_branch_txtInput"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/gray1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/select_branch_txtInput"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:hint="@string/select_branch"
+                        app:boxCornerRadiusBottomEnd="4dp"
+                        app:boxCornerRadiusBottomStart="4dp"
+                        app:boxCornerRadiusTopEnd="4dp"
+                        app:boxCornerRadiusTopStart="4dp"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextAppearance="@style/Caption"
+                        app:hintTextColor="@color/gray1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/icon9"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/filled_exposed_dropdown"
+                            miniBranchesList="@{newCustomerViewModel.miniBranchesList}"
+                            viewModel="@{newCustomerViewModel}"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:editable="false"
+                            android:maxLines="1"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/gray1"
+                            tools:ignore="LabelFor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white_ripple_color" />
+
+
 
                 <TextView
                     android:layout_width="wrap_content"

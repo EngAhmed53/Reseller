@@ -13,23 +13,44 @@
         <action
             android:id="@+id/action_transparentFragment_to_newCustomerFragment"
             app:destination="@id/newCustomerFragment" />
+        <action
+            android:id="@+id/action_transparentFragment_to_newVisitFragment"
+            app:destination="@id/newVisitFragment" />
     </fragment>
     <fragment
         android:id="@+id/newCustomerFragment"
         android:name="com.shouman.apps.reseller.admin.ui.main.newCustomerFragment.NewCustomerFragment"
         android:label="NewCustomerFragment" >
         <action
-            android:id="@+id/action_newCustomerFragment_to_fragmentPickLocation"
-            app:destination="@id/fragmentPickLocation" />
+            android:id="@+id/action_newCustomerFragment_to_fragmentNewCustomerLocationPicker"
+            app:destination="@id/fragmentNewCustomerPickLocation" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentPickLocation"
-        android:name="com.shouman.apps.reseller.admin.ui.main.pickLocationFragment.FragmentPickLocation"
+        android:id="@+id/fragmentNewCustomerPickLocation"
+        android:name="com.shouman.apps.reseller.admin.ui.main.pickLocationFragment.FragmentNewCustomerLocationPicker"
         android:label="FragmentPickLocation" >
         <argument
             android:name="customer"
-            app:argType="com.shouman.apps.reseller.admin.domain.DomainCustomer"
-            app:nullable="true" />
+            app:argType="com.shouman.apps.reseller.admin.domain.DomainCustomer" />
+    </fragment>
+    <fragment
+        android:id="@+id/newVisitFragment"
+        android:name="com.shouman.apps.reseller.admin.ui.main.newVisitFragment.NewVisitFragment"
+        android:label="NewVisitFragment" >
+        <action
+            android:id="@+id/action_newVisitFragment_to_fragmentNewVisitLocationPicker"
+            app:destination="@id/fragmentNewVisitLocationPicker" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentNewVisitLocationPicker"
+        android:name="com.shouman.apps.reseller.admin.ui.main.pickLocationFragment.FragmentNewVisitLocationPicker"
+        android:label="FragmentNewVisitLocationPicker" >
+        <argument
+            android:name="visit"
+            app:argType="com.shouman.apps.reseller.admin.domain.DomainVisit" />
+        <argument
+            android:name="customerLatLng"
+            app:argType="com.google.android.gms.maps.model.LatLng" />
     </fragment>
 
 

@@ -3,6 +3,7 @@ package com.shouman.apps.reseller.admin.ui.main
 import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,11 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager2) { tab, position ->
             tab.icon = when (position) {
-                0 -> getDrawable(R.drawable.ic_home)
-                1 -> getDrawable(R.drawable.ic_supervised_user)
-                2 -> getDrawable(R.drawable.ic_customers)
-                3 -> getDrawable(R.drawable.ic_baseline_bar)
-                4 -> getDrawable(R.drawable.ic_person)
+                0 -> ContextCompat.getDrawable(this, R.drawable.ic_home)
+                1 -> ContextCompat.getDrawable(this, R.drawable.ic_supervised_user)
+                2 -> ContextCompat.getDrawable(this, R.drawable.ic_customers)
+                3 -> ContextCompat.getDrawable(this, R.drawable.ic_baseline_bar)
+                4 -> ContextCompat.getDrawable(this, R.drawable.ic_person)
                 else -> throw IllegalArgumentException("no such position")
             }
         }.attach()
@@ -125,7 +126,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addNewVisitFragment() {
+        /**
+         * Clear previous viewModels to empty eny edit text in the newCustomerFragment
+         */
+        findNavController(R.id.main_container).getViewModelStoreOwner(R.id.main_nav).viewModelStore.clear()
 
+
+        val toNewVisitFragment =
+            TransparentFragmentDirections.actionTransparentFragmentToNewVisitFragment()
+        findNavController(R.id.main_container).navigate(toNewVisitFragment)
+        mainViewModel.subFabActionDon()
     }
 
     private fun addNewSalesFragment() {
@@ -151,6 +161,6 @@ class MainActivity : AppCompatActivity() {
         val toNewCustomerFragment =
             TransparentFragmentDirections.actionTransparentFragmentToNewCustomerFragment()
         findNavController(R.id.main_container).navigate(toNewCustomerFragment)
-        mainViewModel.subFabActionDon()
+        mainViewModel.mainFabActionDon()
     }
 }

@@ -9,6 +9,10 @@
             type="com.shouman.apps.reseller.admin.ui.main.pickLocationFragment.PickLocationViewModel" />
 
         <variable
+            name="uploadCustomerViewModel"
+            type="com.shouman.apps.reseller.admin.ui.main.pickLocationFragment.UploadCustomerViewModel" />
+
+        <variable
             name="customer"
             type="com.shouman.apps.reseller.admin.domain.DomainCustomer" />
 
@@ -74,9 +78,43 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/colorAccent"
             android:enabled="@{locationViewModel.isLocationReady()}"
+            android:onClick="@{() -> uploadCustomerViewModel.sendCustomerToServer(customer)}"
             android:text="@string/pick_location"
             app:layout_constraintBottom_toBottomOf="@+id/map"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="16dp"
+            android:visibility="@{uploadCustomerViewModel.isUploadStatusStarted? view.VISIBLE : view.GONE}"
+            android:background="@color/dark_transparent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/upload_progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/loading_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:textAppearance="@style/Medium"
+                android:textColor="@color/white"
+                android:text="@string/com_facebook_loading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upload_progress_bar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
