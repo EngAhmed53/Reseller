@@ -48,12 +48,14 @@ class NewVisitFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        mBinding.filledExposedDropdown.setAdapter(
-            SpinnerArrayAdapter<DatabaseCustomer>(
-                requireContext(),
-                ArrayList()
+        mBinding.filledExposedDropdown.apply {
+            setAdapter(
+                SpinnerArrayAdapter<DatabaseCustomer>(
+                    requireContext(),
+                    ArrayList()
+                )
             )
-        )
+        }
 
 
 

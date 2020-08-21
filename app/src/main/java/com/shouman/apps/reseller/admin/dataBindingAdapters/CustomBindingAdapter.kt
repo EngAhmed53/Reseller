@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.shouman.apps.reseller.admin.dataBindingAdapters
 
 import android.content.res.ColorStateList
@@ -7,12 +9,16 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker
 import com.shouman.apps.reseller.admin.R
@@ -161,13 +167,13 @@ fun TextView.setBranchesErrorTextVisibility(dataStatus: DataStatus?) {
 
 
 @BindingAdapter(value = ["miniBranchesList", "viewModel"])
-fun AppCompatAutoCompleteTextView.setMiniBranchesList(
+fun MaterialAutoCompleteTextView.setMiniBranchesList(
     miniBranchesList: List<MiniDatabaseBranch>?,
     viewModel: AndroidViewModel
 ) {
     miniBranchesList?.let {
         val adapter = adapter as SpinnerArrayAdapter<MiniDatabaseBranch>
-        adapter.addAll(*it.toTypedArray())
+        adapter.addAll(it)
 
         setOnItemClickListener { _, _, position, _ ->
             setText(miniBranchesList[position].name, false)
@@ -184,14 +190,13 @@ fun AppCompatAutoCompleteTextView.setMiniBranchesList(
 
 
 @BindingAdapter(value = ["customersList", "viewModel"])
-fun AppCompatAutoCompleteTextView.setCustomersList(
+fun MaterialAutoCompleteTextView.setCustomersList(
     customersList: List<DatabaseCustomer>?,
     viewModel: NewVisitViewModel
 ) {
     customersList?.let {
         val adapter = adapter as SpinnerArrayAdapter<DatabaseCustomer>
-        adapter.addAll(*it.toTypedArray())
-
+        adapter.addAll(it)
         setOnItemClickListener { _, _, position, _ ->
             val txt =
                 "${customersList[position].customerName}, ${customersList[position].businessName}"
@@ -219,3 +224,27 @@ fun RecyclerView.setCustomersList(customersList: PagedList<PageableCustomer>?) {
         adapter.submitList(customersList)
     }
 }
+
+//@BindingAdapter(value = ["total", "payments", "dept"])
+//fun PieChart.setValues(total: Long, payments: Long, dept: Long) {
+//    holeRadius = 50f
+//    centerText = context.getString(R.string.total_invoices)
+//    setCenterTextSize(12f)
+//    setEntryLabelTextSize(16f)
+//
+//    val pieEntries =
+//        listOf(PieEntry(payments.toFloat(), "Payments"), PieEntry(dept.toFloat(), "Dept"))
+//
+//    val pieDatSet = PieDataSet(pieEntries, "Customer Activities")
+//
+//    pieDatSet.apply {
+//        colors = listOf(Color.parseColor("#08C1B0"), Color.parseColor("#D81B60"))
+//        valueTextSize = 15f
+//        setDrawEntryLabels(true)
+//    }
+//
+//    val pieData = PieData(pieDatSet)
+//    data = pieData
+//    description = null
+//    invalidate()
+//}

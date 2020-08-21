@@ -170,7 +170,7 @@ class FragmentNewVisitLocationPicker : Fragment(), OnMapReadyCallback {
         googleMap!!.isBuildingsEnabled = true
     }
 
-    fun showSavedLocationOnMap(latLng: LatLng) {
+    private fun showSavedLocationOnMap(latLng: LatLng) {
         googleMap?.apply {
             addMarker(
                 MarkerOptions()

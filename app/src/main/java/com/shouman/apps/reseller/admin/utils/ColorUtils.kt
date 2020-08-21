@@ -1,7 +1,7 @@
 package com.shouman.apps.reseller.admin.utils
 
 fun getRandomColor(position: Int): String? {
-var pos = position
+
     val colors: Array<String> =  arrayOf(
     "#EF5350",
     "#EC407A",
@@ -14,7 +14,7 @@ var pos = position
     "#D4E157"
     )
     return if (position < colors.size) colors[position] else {
-        pos = position % 9
+        val pos = position % 9
         colors[pos]
     }
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shouman.apps.reseller.admin.api.PageableCustomer
 import com.shouman.apps.reseller.admin.databinding.CustomerListItemBinding
 
-class CustomersPagedListAdapter :
+class CustomersPagedListAdapter(val onCustomerClickListener: OnCustomerClickListener) :
     PagedListAdapter<PageableCustomer, CustomersPagedListAdapter.CustomerViewHolder>(
         CustomerDiffUtil
     ) {
@@ -20,7 +20,6 @@ class CustomersPagedListAdapter :
             mBinding.customer = pageableCustomer
         }
     }
-
 
     companion object CustomerDiffUtil : DiffUtil.ItemCallback<PageableCustomer>() {
         override fun areItemsTheSame(
@@ -39,15 +38,22 @@ class CustomersPagedListAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
-        val view =  CustomerListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view =
+            CustomerListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CustomerViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
         val customer = getItem(position)
         holder.bind(customer!!)
+        holder.itemView.setOnClickListener {
+            onCustomerClickListener.onClick(customer.id)
+        }
         holder.mBinding.position = position
     }
 
 
+    class OnCustomerClickListener(val clickListener: (customerId: Long) -> Unit) {
+        fun onClick(customerId: Long) = clickListener(customerId)
+    }
 }

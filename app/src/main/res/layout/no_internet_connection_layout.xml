@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/connection_error_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/no_connection_img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/no_internet_connection"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_wifi_off_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/no_internet_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_connection_text"
+        android:textAppearance="@style/Headline5"
+        android:textColor="@color/primary_text"
+        app:layout_constraintBottom_toTopOf="@id/no_internet_subText"
+        app:layout_constraintEnd_toEndOf="@+id/no_connection_img"
+        app:layout_constraintStart_toStartOf="@+id/no_connection_img"
+        app:layout_constraintTop_toBottomOf="@id/no_connection_img" />
+
+    <TextView
+        android:id="@+id/no_internet_subText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="@string/no_internet_connection_subText"
+        android:textAppearance="@style/Subtitle2"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_internet_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

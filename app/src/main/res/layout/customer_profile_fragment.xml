@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="customerProfileViewModel"
+            type="com.shouman.apps.reseller.admin.ui.main.customerProfileFragment.CustomerProfileViewModel" />
+
+        <variable
+            name="customer"
+            type="com.shouman.apps.reseller.admin.api.CustomerProfile" />
+
+        <variable
+            name="profileStatus"
+            type="com.shouman.apps.reseller.admin.ui.main.customerProfileFragment.GetCustomerProfileStatus" />
+
+        <variable
+            name="formatter"
+            type="com.shouman.apps.reseller.admin.utils.Formatter" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{customerProfileViewModel.isProfileFetchedCompleted()? view.VISIBLE : view.GONE}"
+
+            tools:context=".ui.main.customerProfileFragment.CustomerProfileFragment">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_rounded_corner"
+                android:backgroundTint="@color/white"
+                android:elevation="0dp"
+                android:fitsSystemWindows="true"
+                app:elevation="0dp"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentScrim="@color/colorPrimary"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="112dp"
+                        android:background="@color/white"
+                        app:layout_collapseMode="parallax"
+                        app:layout_scrollFlags="scroll|enterAlways|snap">
+
+
+                            <TextView
+                                android:id="@+id/total"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@{formatter.Companion.formatNumberToCurrency(customer.invoicesTotal)}"
+                                android:textAppearance="@style/Headline5"
+                                android:textColor="@color/primary_text"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="70,140" />
+
+                        <TextView
+                            android:id="@+id/total_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Total"
+                            android:textAppearance="@style/Headline6"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintEnd_toEndOf="@+id/total"
+                            app:layout_constraintStart_toStartOf="@id/total"
+                            app:layout_constraintTop_toBottomOf="@id/total" />
+
+                            <TextView
+                                android:id="@+id/payments"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/jost_medium"
+                                android:text="@{formatter.Companion.formatNumberToCurrency(customer.payment)}"                                android:textAppearance="@style/Headline6"
+                                android:textColor="@color/material_green"
+                                app:layout_constraintEnd_toStartOf="@id/dept"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/total_txt"
+                                tools:text="50,000" />
+
+                        <TextView
+                            android:id="@+id/payments_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Payments"
+                            android:textAppearance="@style/Headline6"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintEnd_toEndOf="@+id/payments"
+                            app:layout_constraintStart_toStartOf="@+id/payments"
+                            app:layout_constraintTop_toBottomOf="@+id/payments" />
+
+                        <TextView
+                            android:id="@+id/dept"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/jost_medium"
+                            android:text="@{formatter.Companion.formatNumberToCurrency(customer.debt)}"
+                            android:textAppearance="@style/Headline6"
+                            android:textColor="@color/material_red"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/payments"
+                            app:layout_constraintTop_toBottomOf="@+id/total_txt"
+                            tools:text="20,140" />
+
+                        <TextView
+                            android:id="@+id/dept_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="16dp"
+                            android:gravity="center"
+                            android:text="Dept"
+                            android:textAppearance="@style/Headline6"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/dept"
+                            app:layout_constraintStart_toStartOf="@+id/dept"
+                            app:layout_constraintTop_toBottomOf="@+id/dept" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/customer_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="?actionBarSize"
+                        android:background="@drawable/bottom_rounded_corner"
+                        android:fontFamily="@font/jost_bold"
+                        android:gravity="center"
+                        android:text="@{customer.customerName}"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/Headline4"
+                        android:textColor="@color/white"
+                        app:layout_collapseMode="parallax"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_scrollFlags="scroll|enterAlways|snap"
+                        tools:text="Ahmed Ali Clay" />
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/materialToolbar"
+                        style="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:background="@color/colorPrimary"
+                        app:layout_collapseMode="pin"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:navigationIcon="@drawable/ic_arrow_back_white" />
+
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="16dp"-->
+                    <!--                        android:layout_marginTop="8dp"-->
+                    <!--                        android:layout_marginEnd="16dp"-->
+                    <!--                        android:padding="8dp"-->
+                    <!--                        android:text="@string/business_info"-->
+                    <!--                        android:textAppearance="@style/Large"-->
+                    <!--                        android:textColor="@color/primary_text" />-->
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_business"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/business_name_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="@{customer.businessName}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/icon4"
+                            app:layout_constraintTop_toBottomOf="@+id/business_name_title_txt"
+                            tools:text="Qebaa Company" />
+
+                        <TextView
+                            android:id="@+id/business_name_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/company_name"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/business_name_txt"
+                            app:layout_constraintStart_toStartOf="@+id/business_name_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include layout="@layout/left_cut_line_view" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_supervisor"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/supervisor_name_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="@{customer.superVisor}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/icon10"
+                            app:layout_constraintTop_toBottomOf="@+id/supervisor_title_txt"
+                            tools:text="Qebaa Company" />
+
+                        <TextView
+                            android:id="@+id/supervisor_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/superVisor_name"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/supervisor_name_txt"
+                            app:layout_constraintStart_toStartOf="@+id/supervisor_name_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include layout="@layout/complete_line_view" />
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="16dp"-->
+                    <!--                        android:layout_marginTop="8dp"-->
+                    <!--                        android:layout_marginEnd="16dp"-->
+                    <!--                        android:padding="8dp"-->
+                    <!--                        android:text="@string/contact_info"-->
+                    <!--                        android:textAppearance="@style/Large"-->
+                    <!--                        android:textColor="@color/primary_text" />-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/email_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:visibility="@{customer.email != null &amp;&amp; customer.email.length() > 0? view.VISIBLE : view.GONE}">
+
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_email_36dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/email_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="@{customer.email}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/icon"
+                            app:layout_constraintTop_toBottomOf="@+id/customer_email_title_txt"
+                            tools:text="Ibrahim858@gamil.com" />
+
+                        <TextView
+                            android:id="@+id/customer_email_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/email_txt"
+                            app:layout_constraintStart_toStartOf="@+id/email_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include
+                        android:id="@+id/cut_line"
+                        layout="@layout/left_cut_line_view"
+                        android:visibility="@{customer.email != null &amp;&amp; customer.email.length() > 0? view.VISIBLE : view.GONE}" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_phone_black_36dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/customer_phone_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="@{customer.phoneNum}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_call_customer"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/icon2"
+                            app:layout_constraintTop_toBottomOf="@+id/customer_phone_title_txt"
+                            tools:text="01028700014" />
+
+                        <TextView
+                            android:id="@+id/customer_phone_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+
+                            android:text="@string/phone"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/customer_phone_txt"
+                            app:layout_constraintStart_toStartOf="@+id/customer_phone_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <ImageButton
+                            android:id="@+id/btn_call_customer"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/call_btn_background"
+                            android:contentDescription="@string/call_customer_phone_number"
+                            android:scaleType="center"
+                            android:onClick="@{() -> customerProfileViewModel.makeCall(customer.phoneNum)}"
+                            android:src="@drawable/ic_call"
+                            android:backgroundTint="@color/material_yellow"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="16dp"-->
+                    <!--                        android:layout_marginTop="8dp"-->
+                    <!--                        android:layout_marginEnd="16dp"-->
+                    <!--                        android:padding="8dp"-->
+                    <!--                        android:text="@string/basic_info"-->
+                    <!--                        android:textAppearance="@style/Large"-->
+                    <!--                        android:textColor="@color/primary_text" />-->
+
+                    <include layout="@layout/complete_line_view" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_access_time_36dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/customer_added_time_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="@{formatter.Companion.formatToMillisecondDate(customer.createTime)}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/icon3"
+                            app:layout_constraintTop_toBottomOf="@+id/customer_added_time_title_txt"
+                            tools:text="20/12/2020 3:00 PM" />
+
+                        <TextView
+                            android:id="@+id/customer_added_time_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/added_time"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/customer_added_time_txt"
+                            app:layout_constraintStart_toStartOf="@+id/customer_added_time_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include layout="@layout/left_cut_line_view" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_person_add_36dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/customer_added_by_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@{customer.createdBy}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/icon5"
+                            app:layout_constraintTop_toBottomOf="@+id/customer_added_by_title_txt"
+                            tools:text="Ebrahim Ebaid" />
+
+                        <TextView
+                            android:id="@+id/customer_added_by_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/added_by"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/customer_added_by_txt"
+                            app:layout_constraintStart_toStartOf="@+id/customer_added_by_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include layout="@layout/left_cut_line_view" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_person_36dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/customer_belong_to_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@{customer.salesmanName}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/icon6"
+                            app:layout_constraintTop_toBottomOf="@+id/customer_belong_to_title_txt"
+                            tools:text="Ebrahim Ebaid" />
+
+                        <TextView
+                            android:id="@+id/customer_belong_to_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/belong_to"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/customer_belong_to_txt"
+                            app:layout_constraintStart_toStartOf="@+id/customer_belong_to_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include layout="@layout/left_cut_line_view" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_branch_36dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/branch_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@{customer.branchName}"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/icon11"
+                            app:layout_constraintTop_toBottomOf="@+id/branch_title_txt"
+                            tools:text="Branch 1" />
+
+                        <TextView
+                            android:id="@+id/branch_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/branch_name"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/branch_txt"
+                            app:layout_constraintStart_toStartOf="@+id/branch_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <include layout="@layout/left_cut_line_view" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/icon12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_place"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/secondary_text" />
+
+                        <TextView
+                            android:id="@+id/location_txt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:textAppearance="@style/Medium"
+                            android:textColor="@color/primary_text"
+                            android:text="@{customerProfileViewModel.customerAddress}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_open_map"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/icon12"
+                            app:layout_constraintTop_toBottomOf="@+id/location_title_txt"
+                            tools:text="Alexandria, Egypt" />
+
+                        <TextView
+                            android:id="@+id/location_title_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/location"
+                            android:textAppearance="@style/Small"
+                            android:textColor="@color/secondary_text"
+                            app:layout_constraintBottom_toTopOf="@+id/location_txt"
+                            app:layout_constraintStart_toStartOf="@+id/location_txt"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <ImageButton
+                            android:id="@+id/btn_open_map"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/call_btn_background"
+                            android:backgroundTint="@color/colorAccent"
+                            android:contentDescription="@string/open_customer_location"
+                            android:scaleType="center"
+                            android:onClick="@{() -> customerProfileViewModel.openLocationOnMap(customer.latitude, customer.longitude)}"
+                            android:src="@drawable/ic_map"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+                    <!--                    android:id="@+id/note_field"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:padding="16dp">-->
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/icon7"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_marginStart="8dp"-->
+                    <!--                        android:src="@drawable/ic_note_36dp"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                        app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                        app:tint="@color/secondary_text" />-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/customer_note"-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="16dp"-->
+                    <!--                        android:layout_marginEnd="16dp"-->
+                    <!--                        android:textAppearance="@style/Medium"-->
+                    <!--                        android:textColor="@color/gray1"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--                        app:layout_constraintHorizontal_bias="0.0"-->
+                    <!--                        app:layout_constraintStart_toEndOf="@+id/icon7"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/customer_note_title_txt"-->
+                    <!--                        tools:text="This is a good product please keep up an have a good time" />-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/customer_note_title_txt"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="@string/customer_notes"-->
+                    <!--                        android:textAppearance="@style/Small"-->
+                    <!--                        android:textColor="@color/gray1"-->
+                    <!--                        app:layout_constraintBottom_toTopOf="@+id/customer_note"-->
+                    <!--                        app:layout_constraintStart_toStartOf="@+id/customer_note"-->
+                    <!--                        app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                        app:layout_constraintVertical_chainStyle="packed" />-->
+
+                    <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/no_internet_connection_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{customerProfileViewModel.isConnectionErrorOccurred()? view.VISIBLE : view.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/loading_layout"
+            layout="@layout/loading_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{customerProfileViewModel.isProfileFetchedStarted()? view.VISIBLE : view.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

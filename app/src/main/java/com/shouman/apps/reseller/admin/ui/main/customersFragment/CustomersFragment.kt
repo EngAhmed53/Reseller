@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shouman.apps.reseller.admin.adapters.CustomersPagedListAdapter
+import com.shouman.apps.reseller.admin.adapters.CustomersPagedListAdapter.OnCustomerClickListener
 import com.shouman.apps.reseller.admin.databinding.CustomersFragmentBinding
 import com.shouman.apps.reseller.admin.repository.paging.DataStatus
+import com.shouman.apps.reseller.admin.ui.main.TransparentFragmentDirections
+
 
 class CustomersFragment : Fragment() {
 
@@ -26,21 +30,29 @@ class CustomersFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(CustomersViewModel::class.java)
 
-        mBinding.lifecycleOwner = this
+        mBinding.apply {
+            lifecycleOwner = this@CustomersFragment
+            customersViewModel = viewModel
+            customersRec.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                adapter = CustomersPagedListAdapter(OnCustomerClickListener {
 
-        mBinding.customersViewModel = viewModel
+                    viewModel.displayCustomerProfile(it)
 
-        mBinding.customersRec.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = CustomersPagedListAdapter()
-            setHasFixedSize(true)
+                })
+                setHasFixedSize(true)
+            }
+            swipeView.setOnRefreshListener {
+                viewModel.pagedLiveData.value!!.dataSource.invalidate()
+            }
         }
 
-        mBinding.swipeView.setOnRefreshListener {
-            viewModel.pagedLiveData.value!!.dataSource.invalidate()
-        }
+        return mBinding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.dataStatus.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it != DataStatus.FETCHING) {
@@ -49,6 +61,15 @@ class CustomersFragment : Fragment() {
             }
         })
 
-        return mBinding.root
+        viewModel.navigateToSelectedCustomer.observe(viewLifecycleOwner, Observer {
+            it?.let { customerId ->
+                val toCustomerProfile =
+                    TransparentFragmentDirections.actionTransparentFragmentToCustomerProfileFragment(
+                        customerId
+                    )
+                findNavController().navigate(toCustomerProfile)
+                viewModel.restoreSelectedCustomerId()
+            }
+        })
     }
 }

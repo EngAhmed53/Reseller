@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_transparentFragment_to_newVisitFragment"
             app:destination="@id/newVisitFragment" />
+        <action
+            android:id="@+id/action_transparentFragment_to_customerProfileFragment"
+            app:destination="@id/customerProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/newCustomerFragment"
@@ -51,6 +54,15 @@
         <argument
             android:name="customerLatLng"
             app:argType="com.google.android.gms.maps.model.LatLng" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerProfileFragment"
+        android:name="com.shouman.apps.reseller.admin.ui.main.customerProfileFragment.CustomerProfileFragment"
+        android:label="CustomerProfileFragment" >
+        <argument
+            android:name="customerId"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 
 

@@ -2,6 +2,8 @@ package com.shouman.apps.reseller.admin.ui.main.customersFragment
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.shouman.apps.reseller.admin.api.PageableCustomer
@@ -20,6 +22,11 @@ class CustomersViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val factory = CustomersDataSourceFactory(viewModelScope, application)
 
+    private val _navigateToSelectedCustomer = MutableLiveData<Long?>()
+    val navigateToSelectedCustomer: LiveData<Long?>
+        get() = _navigateToSelectedCustomer
+
+
     var dataStatus = DataStatusObject.dataStat
 
 
@@ -35,6 +42,14 @@ class CustomersViewModel(application: Application) : AndroidViewModel(applicatio
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun displayCustomerProfile(customerId: Long) {
+        _navigateToSelectedCustomer.value = customerId
+    }
+
+    fun restoreSelectedCustomerId() {
+        _navigateToSelectedCustomer.value = null
     }
 
 }

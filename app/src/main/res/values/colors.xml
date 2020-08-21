@@ -15,6 +15,7 @@
     <color name="colorAccent2">#FFB300</color>
     <color name="material_green">#08C1B0</color>
     <color name="material_yellow">#FFC411</color>
+    <color name="material_red">#E53935</color>
     <color name="material_blue">#00ACC1</color>
     <color name="white">#FFFFFF</color>
     <color name="white_transparent">#69FFFFFF</color>

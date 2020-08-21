@@ -248,5 +248,9 @@
     <string name="location_not_identical">Locations not Identical</string>
     <string name="customer_id_not_valid">Customer Id not valid, please select a valid customer id to continue.</string>
     <string name="customer_location">Customer location</string>
+    <string name="business_info">Business info</string>
+    <string name="location">Location</string>
+    <string name="open_customer_location">Open customer location on google maps</string>
+    <string name="total_invoices">Total</string>
 
 </resources>

@@ -156,4 +156,7 @@ dependencies {
 
     //kotlin serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
+
+    //charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

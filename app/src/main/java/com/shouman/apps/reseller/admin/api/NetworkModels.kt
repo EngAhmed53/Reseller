@@ -74,7 +74,7 @@ data class ServerSalesman(
 data class PageableCustomer(
     val id: Long,
 
-    val belongToSalesman:String,
+    val belongToSalesman: String,
 
     val customerName: String,
 
@@ -136,7 +136,7 @@ data class ServerCustomer(
 
     val longitude: Double,
 
-    val visitsSet: MutableSet<ServerVisit> = HashSet()
+    val visit: ServerVisit
 )
 
 data class ServerVisit(
@@ -149,7 +149,41 @@ data class ServerVisit(
 
     val invoiceNum: Long?,
 
-    val invoiceBalance: Int,
+    val price: Int,
 
-    val invoiceCash: Int
+    val payment: Int
+)
+
+data class CustomerProfile(
+    val id: Long,
+
+    val createTime: Long,
+
+    val createdBy: String,
+
+    val branchName: String,
+
+    val salesmanName: String?,
+
+    val customerName: String,
+
+    val superVisor: String,
+
+    val businessName: String,
+
+    val phoneNum: String,
+
+    val email: String?,
+
+    val latitude: Double,
+
+    val longitude: Double,
+
+    val totalVisits: Int,
+
+    val invoicesTotal:Long,
+
+    val payment: Long,
+
+    val debt: Long
 )

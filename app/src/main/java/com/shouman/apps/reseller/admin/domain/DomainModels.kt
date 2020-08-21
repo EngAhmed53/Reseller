@@ -162,9 +162,7 @@ fun DomainCustomer.toServerCustomer(): ServerCustomer {
         customerName, supervisor, businessName,
         phone, email,
         latitude!!, longitude!!,
-        HashSet<ServerVisit>().apply {
-            add(visit!!.toServerVisit())
-        }
+        visit!!.toServerVisit()
     )
 }
 

@@ -113,6 +113,12 @@ interface CustomersApiServices {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Deferred<List<PageableCustomer>>
+
+    @GET("companies/{companyId}/customers/{customerId}/profile")
+    fun getCustomerProfileAsync(
+        @Path("companyId") companyID: Long,
+        @Path("customerId") customerId: Long
+    ): Deferred<ServerResponse<CustomerProfile?>>
 }
 
 interface VisitsApiServices {
