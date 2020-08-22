@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.shouman.apps.reseller.admin.R
 import com.shouman.apps.reseller.admin.databinding.CustomerProfileFragmentBinding
@@ -38,6 +39,9 @@ class CustomerProfileFragment : Fragment() {
 
             lifecycleOwner = this@CustomerProfileFragment
 
+            materialToolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
         return mBinding.root

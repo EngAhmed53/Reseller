@@ -39,7 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{customerProfileViewModel.isProfileFetchedCompleted()? view.VISIBLE : view.GONE}"
-
             tools:context=".ui.main.customerProfileFragment.CustomerProfileFragment">
 
             <com.google.android.material.appbar.AppBarLayout
@@ -67,19 +66,19 @@
                         app:layout_scrollFlags="scroll|enterAlways|snap">
 
 
-                            <TextView
-                                android:id="@+id/total"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="@{formatter.Companion.formatNumberToCurrency(customer.invoicesTotal)}"
-                                android:textAppearance="@style/Headline5"
-                                android:textColor="@color/primary_text"
-                                android:layout_marginTop="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:text="70,140" />
+                        <TextView
+                            android:id="@+id/total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="@{formatter.Companion.formatNumberToCurrency(customer.invoicesTotal)}"
+                            android:textAppearance="@style/Headline5"
+                            android:textColor="@color/primary_text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="70,140" />
 
                         <TextView
                             android:id="@+id/total_txt"
@@ -87,25 +86,26 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="Total"
+                            android:text="@string/total"
                             android:textAppearance="@style/Headline6"
                             android:textColor="@color/secondary_text"
                             app:layout_constraintEnd_toEndOf="@+id/total"
                             app:layout_constraintStart_toStartOf="@id/total"
                             app:layout_constraintTop_toBottomOf="@id/total" />
 
-                            <TextView
-                                android:id="@+id/payments"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/jost_medium"
-                                android:text="@{formatter.Companion.formatNumberToCurrency(customer.payment)}"                                android:textAppearance="@style/Headline6"
-                                android:textColor="@color/material_green"
-                                app:layout_constraintEnd_toStartOf="@id/dept"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/total_txt"
-                                tools:text="50,000" />
+                        <TextView
+                            android:id="@+id/payments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/jost_medium"
+                            android:text="@{formatter.Companion.formatNumberToCurrency(customer.payment)}"
+                            android:textAppearance="@style/Headline6"
+                            android:textColor="@color/material_green"
+                            app:layout_constraintEnd_toStartOf="@id/dept"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/total_txt"
+                            tools:text="50,000" />
 
                         <TextView
                             android:id="@+id/payments_txt"
@@ -113,7 +113,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="Payments"
+                            android:text="@string/payments"
                             android:textAppearance="@style/Headline6"
                             android:textColor="@color/secondary_text"
                             app:layout_constraintEnd_toEndOf="@+id/payments"
@@ -141,7 +141,7 @@
                             android:layout_gravity="center"
                             android:layout_marginBottom="16dp"
                             android:gravity="center"
-                            android:text="Dept"
+                            android:text="@string/dept"
                             android:textAppearance="@style/Headline6"
                             android:textColor="@color/secondary_text"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -420,11 +420,11 @@
                             android:layout_height="48dp"
                             android:layout_margin="8dp"
                             android:background="@drawable/call_btn_background"
-                            android:contentDescription="@string/call_customer_phone_number"
-                            android:scaleType="center"
-                            android:onClick="@{() -> customerProfileViewModel.makeCall(customer.phoneNum)}"
-                            android:src="@drawable/ic_call"
                             android:backgroundTint="@color/material_yellow"
+                            android:contentDescription="@string/call_customer_phone_number"
+                            android:onClick="@{() -> customerProfileViewModel.makeCall(customer.phoneNum)}"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_call"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -651,9 +651,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
+                            android:text="@{customerProfileViewModel.customerAddress}"
                             android:textAppearance="@style/Medium"
                             android:textColor="@color/primary_text"
-                            android:text="@{customerProfileViewModel.customerAddress}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_open_map"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -681,8 +681,8 @@
                             android:background="@drawable/call_btn_background"
                             android:backgroundTint="@color/colorAccent"
                             android:contentDescription="@string/open_customer_location"
-                            android:scaleType="center"
                             android:onClick="@{() -> customerProfileViewModel.openLocationOnMap(customer.latitude, customer.longitude)}"
+                            android:scaleType="center"
                             android:src="@drawable/ic_map"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

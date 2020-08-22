@@ -258,4 +258,8 @@
     <string name="location">Location</string>
     <string name="open_customer_location">Open customer location on google maps</string>
     <string name="total_invoices">Total</string>
+    <string name="total">Total</string>
+    <string name="payments">Payments</string>
+    <string name="dept">Dept</string>
+    <string name="open_calender">Choose day from calender</string>
 </resources>

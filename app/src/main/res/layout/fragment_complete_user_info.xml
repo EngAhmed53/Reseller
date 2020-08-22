@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -93,9 +93,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/white"
-                        app:cardCornerRadius="80dp"
                         android:clickable="true"
                         android:focusable="true"
+                        app:cardCornerRadius="80dp"
                         app:strokeColor="@color/white"
                         app:strokeWidth="1dp">
 
@@ -103,18 +103,18 @@
                             android:id="@+id/profile_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:elevation="1dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="@string/upload_profile_pic"
+                            android:elevation="1dp"
                             android:scaleType="centerCrop" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_margin="8dp"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:layout_gravity="center"
                             android:text="@string/select_company_logo"
                             android:textAppearance="@style/Subtitle1"
                             android:textColor="@color/secondary_text"
@@ -182,11 +182,11 @@
                             app:endIconTint="@color/colorAccent"
                             app:hintTextAppearance="@style/Caption"
                             app:hintTextColor="@color/gray1"
-                            app:setEndIconActive="@{validator.Companion.isOwnerNameValid(ownerName)}"
                             app:layout_constraintBottom_toTopOf="@id/phone_num_inputLayout"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:setEndIconActive="@{validator.Companion.isOwnerNameValid(ownerName)}">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
@@ -218,7 +218,6 @@
                             app:boxCornerRadiusTopEnd="4dp"
                             app:boxCornerRadiusTopStart="4dp"
                             app:boxStrokeWidth="1dp"
-                            app:setEndIconActive="@{validator.Companion.isCompanyNameValid(companyName)}"
                             app:endIconDrawable="@drawable/ic_round_check_24"
                             app:endIconMode="custom"
                             app:endIconTint="@color/colorAccent"
@@ -227,7 +226,8 @@
                             app:layout_constraintBottom_toTopOf="@id/btn_finish_sign_up"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/phone_num_inputLayout">
+                            app:layout_constraintTop_toBottomOf="@id/phone_num_inputLayout"
+                            app:setEndIconActive="@{validator.Companion.isCompanyNameValid(companyName)}">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
@@ -253,7 +253,7 @@
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
                             android:focusable="true"
-                            app:setEndIconActive="@{validator.Companion.isPhoneValid(phoneNum)}"
+                            android:hint="@string/phone"
                             android:textColorHint="@color/black"
                             app:boxCornerRadiusBottomEnd="4dp"
                             app:boxCornerRadiusBottomStart="4dp"
@@ -262,14 +262,14 @@
                             app:boxStrokeWidth="1dp"
                             app:endIconDrawable="@drawable/ic_round_check_24"
                             app:endIconMode="custom"
-                            android:hint="@string/phone"
                             app:endIconTint="@color/colorAccent"
                             app:hintTextAppearance="@style/Caption"
                             app:hintTextColor="@color/gray1"
                             app:layout_constraintBottom_toTopOf="@id/com_name_inputLayout"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/ccp"
-                            app:layout_constraintTop_toBottomOf="@id/owner_name_inputLayout">
+                            app:layout_constraintTop_toBottomOf="@id/owner_name_inputLayout"
+                            app:setEndIconActive="@{validator.Companion.isPhoneValid(phoneNum)}">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/phone_num_editText"
@@ -289,13 +289,13 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
+                            app:ccp_enableHint="false"
                             app:layout_constraintBottom_toBottomOf="@+id/phone_num_inputLayout"
                             app:layout_constraintEnd_toStartOf="@+id/phone_num_inputLayout"
-                            app:ccp_enableHint="false"
-                            bind:phoneNumber="@{phoneNum}"
-                            bind:viewModel="@{userInfoViewModel}"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/phone_num_inputLayout" />
+                            app:layout_constraintTop_toTopOf="@+id/phone_num_inputLayout"
+                            bind:phoneNumber="@{phoneNum}"
+                            bind:viewModel="@{userInfoViewModel}" />
 
                         <Button
                             android:id="@+id/btn_finish_sign_up"
@@ -331,11 +331,11 @@
 
         <FrameLayout
             android:id="@+id/protection_frame"
+            uploadInfoStatus="@{userInfoViewModel.uploadCompanyInfoStatus}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/dark_transparent"
             android:elevation="16dp"
-            uploadInfoStatus="@{userInfoViewModel.uploadCompanyInfoStatus}"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -364,11 +364,11 @@
 
                 <TextView
                     android:id="@+id/loading_text"
+                    uploadInfoTextStatus="@{userInfoViewModel.uploadCompanyInfoStatus}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:padding="8dp"
-                    uploadInfoTextStatus="@{userInfoViewModel.uploadCompanyInfoStatus}"
                     android:textAppearance="@style/Subtitle1"
                     android:textColor="@color/primary_text"
                     app:layout_constraintBottom_toBottomOf="parent"

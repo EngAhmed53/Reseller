@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.shouman.apps.reseller.admin.api.PageableCustomer" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:rippleColor="?colorControlHighlight">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_img_layout"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/activity_txt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                    android:id="@+id/circularRevealCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
+                    android:clickable="true"
+                    android:elevation="0dp"
+                    android:focusable="true"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp">
+
+                    <ImageView
+                        android:id="@+id/profile_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/upload_profile_pic"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/company_home_2" />
+
+                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+                <ImageButton
+                    android:id="@+id/select_remove_button"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/circle_image_button"
+                    android:contentDescription="@string/select_photo"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_redo"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/circularRevealCardView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/activity_txt"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/jost_light"
+                android:textAppearance="@style/Small"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_img_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/profile_img_layout"
+                app:layout_constraintTop_toTopOf="@+id/profile_img_layout"
+                tools:text="Ahmed Ali add new customer with name Ibrahim mohammed Ibrahim Khalil" />
+
+            <TextView
+                android:id="@+id/activity_time_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/jost_extra_light"
+                android:textAppearance="@style/Subtitle2"
+                android:textColor="@color/secondary_text"
+                app:layout_constraintStart_toStartOf="@+id/activity_txt"
+                app:layout_constraintTop_toBottomOf="@+id/activity_txt"
+                tools:text="13:30" />
+
+            <Button
+                android:id="@+id/open_customer_profile"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginBottom="8dp"
+                android:padding="0dp"
+                android:text="Customer profile"
+                android:textAppearance="@style/Button"
+                android:textColor="@color/facebook_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/open_visit_info"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/activity_txt"
+                app:layout_constraintTop_toBottomOf="@+id/activity_time_txt" />
+
+            <Button
+                android:id="@+id/open_visit_info"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Visit info"
+                android:padding="0dp"
+                android:textAppearance="@style/Button"
+                android:textColor="@color/facebook_color"
+                app:layout_constraintBaseline_toBaselineOf="@+id/open_customer_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/open_customer_profile" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
