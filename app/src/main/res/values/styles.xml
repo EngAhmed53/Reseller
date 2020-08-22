@@ -29,8 +29,8 @@
     </style>
 
     <style name="Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:fontFamily">@font/jost_medium</item>
-        <item name="fontFamily">@font/jost_medium</item>
+        <item name="android:fontFamily">@font/jost_regular</item>
+        <item name="fontFamily">@font/jost_regular</item>
     </style>
 
     <style name="Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
@@ -41,7 +41,7 @@
 
     <style name="Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="android:fontFamily">@font/jost_medium</item>
-        <item name="fontFamily">@font/jost_medium</item>
+        <item name="fontFamily">@font/jost_regular</item>
     </style>
 
     <style name="Caption" parent="TextAppearance.MaterialComponents.Caption">
