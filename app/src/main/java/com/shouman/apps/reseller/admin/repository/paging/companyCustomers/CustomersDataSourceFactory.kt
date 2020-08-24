@@ -1,4 +1,4 @@
-package com.shouman.apps.reseller.admin.repository.paging
+package com.shouman.apps.reseller.admin.repository.paging.companyCustomers
 
 import android.app.Application
 import androidx.paging.DataSource

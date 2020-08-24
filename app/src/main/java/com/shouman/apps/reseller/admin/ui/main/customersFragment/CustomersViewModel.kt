@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.shouman.apps.reseller.admin.api.PageableCustomer
-import com.shouman.apps.reseller.admin.repository.paging.CustomersDataSourceFactory
-import com.shouman.apps.reseller.admin.repository.paging.DataStatusObject
+import com.shouman.apps.reseller.admin.repository.paging.companyCustomers.CustomersDataSourceFactory
+import com.shouman.apps.reseller.admin.repository.paging.companyCustomers.DataStatusObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -16,16 +16,15 @@ import kotlinx.coroutines.SupervisorJob
 
 class CustomersViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val _navigateToSelectedCustomer = MutableLiveData<Long?>()
+    val navigateToSelectedCustomer: LiveData<Long?>
+        get() = _navigateToSelectedCustomer
+
     private val viewModelJob = SupervisorJob()
 
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.IO)
 
     private val factory = CustomersDataSourceFactory(viewModelScope, application)
-
-    private val _navigateToSelectedCustomer = MutableLiveData<Long?>()
-    val navigateToSelectedCustomer: LiveData<Long?>
-        get() = _navigateToSelectedCustomer
-
 
     var dataStatus = DataStatusObject.dataStat
 

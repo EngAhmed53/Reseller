@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shouman.apps.reseller.admin.adapters.CustomersPagedListAdapter
 import com.shouman.apps.reseller.admin.adapters.CustomersPagedListAdapter.OnCustomerClickListener
 import com.shouman.apps.reseller.admin.databinding.CustomersFragmentBinding
-import com.shouman.apps.reseller.admin.repository.paging.DataStatus
+import com.shouman.apps.reseller.admin.repository.paging.companyCustomers.DataStatus
 import com.shouman.apps.reseller.admin.ui.main.TransparentFragmentDirections
 
 

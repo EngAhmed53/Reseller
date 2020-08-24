@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -14,17 +15,18 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker
 import com.shouman.apps.reseller.admin.R
+import com.shouman.apps.reseller.admin.adapters.ActivitiesPagedListAdapter
 import com.shouman.apps.reseller.admin.adapters.BranchesListAdapter
 import com.shouman.apps.reseller.admin.adapters.CustomersPagedListAdapter
 import com.shouman.apps.reseller.admin.adapters.SpinnerArrayAdapter
+import com.shouman.apps.reseller.admin.api.ActivityType
+import com.shouman.apps.reseller.admin.api.PageableActivity
 import com.shouman.apps.reseller.admin.api.PageableCustomer
 import com.shouman.apps.reseller.admin.data.model.DatabaseCustomer
 import com.shouman.apps.reseller.admin.data.model.MiniDatabaseBranch
@@ -36,6 +38,7 @@ import com.shouman.apps.reseller.admin.ui.main.newCustomerFragment.NewCustomerVi
 import com.shouman.apps.reseller.admin.ui.main.newSalesmanFragment.NewSalesmanViewModel
 import com.shouman.apps.reseller.admin.ui.main.newVisitFragment.NewVisitViewModel
 import com.shouman.apps.reseller.admin.ui.main.teamFragment.DataStatus
+import com.shouman.apps.reseller.admin.utils.DateUtils
 import com.shouman.apps.reseller.admin.utils.getRandomColor
 
 
@@ -221,7 +224,58 @@ fun FrameLayout.setBackgroundTint(position: Int?) {
 fun RecyclerView.setCustomersList(customersList: PagedList<PageableCustomer>?) {
     customersList?.let {
         val adapter = adapter as CustomersPagedListAdapter
-        adapter.submitList(customersList)
+        adapter.submitList(it)
+    }
+}
+
+@BindingAdapter("setActivitiesList")
+fun RecyclerView.setActivitiesList(activitiesList: PagedList<PageableActivity>?) {
+    activitiesList?.let {
+        val adapter = adapter as ActivitiesPagedListAdapter
+        adapter.submitList(it)
+    }
+}
+
+@BindingAdapter("setWeekDay")
+fun TextView.setWeekDay(date: Long?) {
+    date?.let {
+        text = DateUtils.getWeekDay(context, it)
+    }
+}
+
+@BindingAdapter("imageUrl")
+fun ImageView.bindImage(imgUrl: String?) {
+
+    imgUrl?.let {
+        Glide.with(context)
+            .load(it)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(this)
+        return
+    }
+    setImageResource(R.drawable.ic_user)
+}
+
+@BindingAdapter(value = ["createdBy", "type", "customerName"])
+fun TextView.setActivityBodyText(createdBy: String?, type: ActivityType?, customerName: String?) {
+
+    type?.let {
+
+        val creator = createdBy ?: context.getString(R.string.admin)
+
+        text = when (type) {
+
+            ActivityType.NEW_CUSTOMER -> {
+                context.getString(R.string.activity_body_new_customer, creator, customerName)
+            }
+            ActivityType.NEW_VISIT -> {
+                context.getString(R.string.activity_body_new_visit, creator, customerName)
+            }
+        }
     }
 }
 

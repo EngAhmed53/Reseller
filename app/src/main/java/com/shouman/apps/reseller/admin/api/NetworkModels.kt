@@ -187,3 +187,56 @@ data class CustomerProfile(
 
     val debt: Long
 )
+
+enum class ActivityType {
+    NEW_VISIT, NEW_CUSTOMER
+}
+
+data class PageableActivity(
+    val id: Long,
+
+    val type: ActivityType,
+
+    val createdTime: Long,
+
+    val createdBy: String?,
+
+    val createdById: Long?,
+
+    val createdByImgUrl: String?,
+
+    val visitId: Long,
+
+    val customerId: Long,
+
+    val customerName: String
+)
+
+data class CompanyDateSummary(
+    val totalNewCustomer: Int,
+
+    val totalVisits: Int,
+
+    val totalIncome: Long,
+
+    val totalSales: Long
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -11,7 +11,7 @@
 
         <variable
             name="dataStatus"
-            type="com.shouman.apps.reseller.admin.repository.paging.DataStatus" />
+            type="com.shouman.apps.reseller.admin.repository.paging.companyCustomers.DataStatus" />
 
         <variable
             name="view"
@@ -98,7 +98,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:visibility="@{customersViewModel.dataStatus == dataStatus.FETCHED ? view.VISIBLE : view.INVISIBLE}"
+                android:visibility="@{customersViewModel.dataStatus != dataStatus.ERROR ? view.VISIBLE : view.INVISIBLE}"
                 tools:listitem="@layout/customer_list_item" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

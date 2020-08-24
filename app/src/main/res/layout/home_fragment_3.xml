@@ -3,6 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.shouman.apps.reseller.admin.ui.main.homeFragment.HomeViewModel" />
+
+        <variable
+            name="dateFormatter"
+            type="com.shouman.apps.reseller.admin.utils.DateUtils" />
+
+        <variable
+            name="dateSummary"
+            type="com.shouman.apps.reseller.admin.api.CompanyDateSummary" />
+
+        <variable
+            name="formatter"
+            type="com.shouman.apps.reseller.admin.utils.Formatter" />
+
+    </data>
+
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,6 +37,7 @@
 
             <TextView
                 android:id="@+id/week_day_txt"
+                setWeekDay="@{viewModel.selectedDayLiveData}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -26,13 +47,13 @@
                 android:gravity="center"
                 android:letterSpacing=".05"
                 android:singleLine="true"
-                android:text="Wednesday"
                 android:textAppearance="@style/Subtitle2"
                 android:textColor="@color/secondary_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Today" />
 
             <TextView
                 android:id="@+id/date_day_txt"
@@ -41,13 +62,14 @@
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/jost_bold"
                 android:singleLine="true"
-                android:text="15 DECEMBER"
+                android:text="@{dateFormatter.Companion.getMonthAndMonthDay(viewModel.selectedDayLiveData)}"
                 android:textAppearance="@style/Headline5"
                 android:textColor="@color/primary_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/week_day_txt" />
+                app:layout_constraintTop_toBottomOf="@+id/week_day_txt"
+                tools:text="15 DECEMBER" />
 
             <TextView
                 android:id="@+id/date_year_txt"
@@ -56,13 +78,15 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/jost_regular"
+                android:letterSpacing=".1"
                 android:singleLine="true"
-                android:text="DECEMBER 2019"
+                android:text="@{dateFormatter.Companion.getMYear(viewModel.selectedDayLiveData)}"
                 android:textAppearance="@style/Subtitle2"
                 android:textColor="@color/secondary_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/date_day_txt" />
+                app:layout_constraintTop_toBottomOf="@+id/date_day_txt"
+                tools:text="2019" />
 
             <ImageButton
                 android:id="@+id/calender"
@@ -80,7 +104,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/info_frame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -144,7 +168,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:gravity="center"
                                     android:padding="0dp"
-                                    android:text="15"
+                                    android:text="@{String.valueOf(dateSummary.totalNewCustomer)}"
                                     android:textAppearance="@style/Headline6"
                                     android:textColor="@color/white"
                                     app:layout_constraintBottom_toTopOf="@id/new_customer"
@@ -218,7 +242,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:gravity="center"
                                     android:padding="0dp"
-                                    android:text="25"
+                                    android:text="@{String.valueOf(dateSummary.totalVisits)}"
                                     android:textAppearance="@style/Headline6"
                                     android:textColor="@color/white"
                                     app:layout_constraintBottom_toTopOf="@id/new_visit"
@@ -293,7 +317,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:gravity="center"
                                     android:padding="0dp"
-                                    android:text="$10,120"
+                                    android:text="@{formatter.Companion.formatNumberToCurrency(dateSummary.totalIncome)}"
                                     android:textAppearance="@style/Headline6"
                                     android:textColor="@color/white"
                                     app:layout_constraintBottom_toTopOf="@id/income_title"
@@ -370,7 +394,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:gravity="center"
                                     android:padding="0dp"
-                                    android:text="$15,320"
+                                    android:text="@{formatter.Companion.formatNumberToCurrency(dateSummary.totalSales)}"
                                     android:textAppearance="@style/Headline6"
                                     android:textColor="@color/white"
                                     app:layout_constraintBottom_toTopOf="@id/sales_title"
@@ -420,6 +444,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/activities_recView"
+                    setActivitiesList="@{viewModel.pagedLiveData}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
@@ -428,12 +453,10 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
                     android:visibility="visible"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/activity_list_item" />
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

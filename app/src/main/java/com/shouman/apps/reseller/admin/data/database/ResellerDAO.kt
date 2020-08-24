@@ -6,7 +6,6 @@ import com.shouman.apps.reseller.admin.data.model.DatabaseBranch
 import com.shouman.apps.reseller.admin.data.model.DatabaseBranchSalesmen
 import com.shouman.apps.reseller.admin.data.model.DatabaseCustomer
 import com.shouman.apps.reseller.admin.data.model.DatabaseSalesman
-import com.shouman.apps.reseller.admin.repository.paging.CustomerDataSource
 
 @Dao
 interface ResellerDAO {

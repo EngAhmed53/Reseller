@@ -1,8 +1,7 @@
-package com.shouman.apps.reseller.admin.repository.paging
+package com.shouman.apps.reseller.admin.repository.paging.companyCustomers
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.shouman.apps.reseller.admin.api.CustomersApiServices
@@ -59,7 +58,7 @@ class CustomerDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, PageableCustomer>) {
         coroutineScope.launch {
             try {
-                DataStatusObject.dataStat.postValue(DataStatus.FETCHED)
+                DataStatusObject.dataStat.postValue(DataStatus.FETCHING)
                 val customersList: List<PageableCustomer> =
                     customersApiServices.getAllCustomersAsync(
                         3,

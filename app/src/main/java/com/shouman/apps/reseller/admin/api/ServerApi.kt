@@ -2,7 +2,6 @@ package com.shouman.apps.reseller.admin.api
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.shouman.apps.reseller.admin.data.model.DatabaseCustomer
-import com.shouman.apps.reseller.admin.domain.DomainCustomer
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -10,7 +9,6 @@ import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
@@ -49,7 +47,6 @@ private val client by lazy {
         .addInterceptor(BasicAuthInterceptor(BASIC_NAME, BASIC_PASWORD))
         .build()
 }
-
 
 
 private val retrofit by lazy {
@@ -131,12 +128,29 @@ interface VisitsApiServices {
     ): Deferred<ResponseCode>
 
     @GET("companies/{companyId}/customers/{customerId}/visits")
-    fun getAllCustomersAsync(
+    fun getAllCustomerVisitsAsync(
         @Path("companyId") companyID: Long,
         @Path("customerId") customerId: Long,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Deferred<List<ServerVisit>>
+}
+
+interface ActivitiesApiServices {
+
+    @GET("companies/{companyId}/activities/{date}")
+    fun getAllCompanyActivitiesByDateAsync(
+        @Path("companyId") companyID: Long,
+        @Path("date") date: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Deferred<List<PageableActivity>>
+
+    @GET("companies/{companyId}/activities/{date}")
+    fun getCompanyDaySummaryAsync(
+        @Path("companyId") companyID: Long,
+        @Path("date") date: Long
+    ): Deferred<ServerResponse<CompanyDateSummary?>>
 }
 
 object NetworkCall {
@@ -148,11 +162,15 @@ object NetworkCall {
         retrofit.create(BranchesApiServices::class.java)
     }
 
-    val customersServices:CustomersApiServices by lazy {
+    val customersServices: CustomersApiServices by lazy {
         retrofit.create(CustomersApiServices::class.java)
     }
 
-    val visitsServices:VisitsApiServices by lazy {
+    val visitsServices: VisitsApiServices by lazy {
         retrofit.create(VisitsApiServices::class.java)
+    }
+
+    val activitiesServices by lazy {
+        retrofit.create(ActivitiesApiServices::class.java)
     }
 }

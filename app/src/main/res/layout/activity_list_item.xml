@@ -7,7 +7,15 @@
 
         <variable
             name="activity"
-            type="com.shouman.apps.reseller.admin.api.PageableCustomer" />
+            type="com.shouman.apps.reseller.admin.api.PageableActivity" />
+
+        <variable
+            name="activityType"
+            type="com.shouman.apps.reseller.admin.api.ActivityType" />
+
+        <variable
+            name="dateUtils"
+            type="com.shouman.apps.reseller.admin.utils.DateUtils" />
 
     </data>
 
@@ -30,8 +38,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/profile_img_layout"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -50,29 +58,29 @@
                     android:clickable="true"
                     android:elevation="0dp"
                     android:focusable="true"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp">
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="0dp">
 
                     <ImageView
                         android:id="@+id/profile_img"
+                        imageUrl="@{activity.createdByImgUrl}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/upload_profile_pic"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/company_home_2" />
+                        android:scaleType="centerCrop" />
 
                 </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
                 <ImageButton
                     android:id="@+id/select_remove_button"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:background="@drawable/circle_image_button"
+                    android:backgroundTint="@{activity.type == activityType.NEW_CUSTOMER ? @color/material_green : @color/material_yellow }"
                     android:contentDescription="@string/select_photo"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_redo"
+                    android:scaleType="centerInside"
+                    android:src="@{activity.type == activityType.NEW_CUSTOMER ? @drawable/ic_person_add : @drawable/ic_redo }"
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/circularRevealCardView" />
@@ -82,61 +90,40 @@
 
             <TextView
                 android:id="@+id/activity_txt"
+                createdBy="@{activity.createdBy}"
+                customerName="@{activity.customerName}"
+                type="@{activity.type}"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:ellipsize="end"
+                android:ellipsize="start"
                 android:fontFamily="@font/jost_light"
-                android:textAppearance="@style/Small"
+                android:maxLines="2"
+                android:textAppearance="@style/Medium"
                 android:textColor="@color/primary_text"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_img_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@id/activity_time_txt"
                 app:layout_constraintStart_toEndOf="@+id/profile_img_layout"
                 app:layout_constraintTop_toTopOf="@+id/profile_img_layout"
-                tools:text="Ahmed Ali add new customer with name Ibrahim mohammed Ibrahim Khalil" />
+                tools:text="Ahmed Ali add customer with name Ibrahim mohammed Ibrahim Khalil" />
 
             <TextView
                 android:id="@+id/activity_time_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/jost_light"
+                android:text="@{dateUtils.Companion.getShortTime(activity.createdTime)}"
                 android:textAppearance="@style/Subtitle2"
                 android:textColor="@color/secondary_text"
-                app:layout_constraintStart_toStartOf="@+id/activity_txt"
-                app:layout_constraintTop_toBottomOf="@+id/activity_txt"
-                tools:text="13:30" />
-
-            <Button
-                android:id="@+id/open_customer_profile"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginBottom="8dp"
-                android:padding="0dp"
-                android:text="Customer profile"
-                android:textAppearance="@style/Button"
-                android:textColor="@color/facebook_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/open_visit_info"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="@+id/activity_txt"
-                app:layout_constraintTop_toBottomOf="@+id/activity_time_txt" />
-
-            <Button
-                android:id="@+id/open_visit_info"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="Visit info"
-                android:padding="0dp"
-                android:textAppearance="@style/Button"
-                android:textColor="@color/facebook_color"
-                app:layout_constraintBaseline_toBaselineOf="@+id/open_customer_profile"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/open_customer_profile" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/activity_txt"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="13:30" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

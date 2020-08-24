@@ -262,4 +262,23 @@
     <string name="payments">Payments</string>
     <string name="dept">Dept</string>
     <string name="open_calender">Choose day from calender</string>
+    <string name="activity_body_new_customer">%1$s add new customer with name %2$s.</string>
+    <string name="activity_body_new_visit">%1$s add new visit to %2$s.</string>
+    <string name="admin">Admin</string>
+    <string name="reports_subHeader">Company overall and details reports.</string>
+    <string name="company_overall_report">Company Oveview</string>
+    <string name="company_overview_subtitle">Your company states overview</string>
+    <string name="daily_visits_report">Daily Visits Report</string>
+    <string name="daily_visits_report_subtitle">Your sales team daily visits report</string>
+    <string name="branches_overview_report">Branches Overview</string>
+    <string name="branch_overview_subtitle">View each branch states overview</string>
+    <string name="salesmen_overview_report">Salesmen Overview</string>
+    <string name="salesmen_report_subtitle">View each salesman states</string>
+    <string name="salesmen_visits_report">Salesmen Visits Report</string>
+    <string name="salesman_daily_visits_report_subtitle">Salesman daily visits report</string>
+    <string name="customers_overview">Customers Overview</string>
+    <string name="customer_overview_report_title">View Each customer States</string>
+    <string name="customers_visits_report">Customers Visits Report</string>
+    <string name="customer_daily_visits_report_subtitle">Customer daily visits report</string>
+
 </resources>
